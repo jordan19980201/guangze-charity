@@ -1,0 +1,132 @@
+# ============================================================
+# Sveltia CMS 設定檔（與 Decap CMS 相容）
+# 後台網址：你的網域/admin/
+#
+# ⚠️ 部署前請務必修改下方 repo 為你的 GitHub 帳號/儲存庫名稱
+#    例如： repo: jordan1998/guangze-charity
+# ============================================================
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME   # ← 請改成你的 GitHub 帳號/儲存庫
+  branch: main
+
+# 本機測試用（搭配 npx @sveltia/cms-proxy-server，需安裝 Node）。
+# 正式部署後可改為 false 或移除。
+local_backend: true
+
+# 後台介面語言
+locale: zh_Hant
+
+# 上傳的圖片存放位置
+media_folder: "public/assets/img/uploads"  # 在儲存庫中的實際路徑
+public_folder: "assets/img/uploads"        # 寫入內容時使用的網址路徑
+
+# 存檔時的 commit 訊息（繁體中文）
+backend_commit_messages: {}
+
+collections:
+  # ---------- 首頁輪播大圖 ----------
+  - name: "carousel"
+    label: "首頁輪播大圖"
+    files:
+      - name: "carousel"
+        label: "輪播設定"
+        file: "public/content/carousel.json"
+        format: json
+        fields:
+          - label: "輪播照片"
+            name: "slides"
+            widget: "list"
+            label_singular: "一張照片"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "大圖（建議 1920×1080）", name: "image", widget: "image" }
+              - { label: "主標題", name: "title", widget: "string" }
+              - { label: "副標題", name: "subtitle", widget: "string", required: false }
+              - { label: "排序（數字小的在前）", name: "order", widget: "number", default: 1 }
+
+  # ---------- 影響力數據 ----------
+  - name: "impact"
+    label: "影響力數據"
+    files:
+      - name: "impact"
+        label: "首頁數據"
+        file: "public/content/impact.json"
+        format: json
+        fields:
+          - { label: "引言", name: "intro", widget: "string", required: false }
+          - label: "數據項目"
+            name: "stats"
+            widget: "list"
+            label_singular: "一項數據"
+            summary: "{{fields.number}}{{fields.unit}}｜{{fields.label}}"
+            fields:
+              - { label: "數字", name: "number", widget: "string" }
+              - { label: "單位（年/戶/斤…）", name: "unit", widget: "string", required: false }
+              - { label: "說明文字", name: "label", widget: "string" }
+          - { label: "備註（不顯示於前台）", name: "note", widget: "string", required: false }
+
+  # ---------- 最新消息 ----------
+  - name: "news"
+    label: "最新消息／活動公告"
+    files:
+      - name: "news"
+        label: "消息列表"
+        file: "public/content/news.json"
+        format: json
+        fields:
+          - label: "消息"
+            name: "items"
+            widget: "list"
+            label_singular: "一則消息"
+            summary: "{{fields.date}}｜{{fields.title}}"
+            fields:
+              - { label: "網址代碼（英文/數字，需唯一）", name: "id", widget: "string", hint: "例如 2025-rice-charity，存檔後請勿任意更改" }
+              - { label: "標題", name: "title", widget: "string" }
+              - { label: "日期", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+              - { label: "封面照片", name: "cover", widget: "image", required: false }
+              - { label: "摘要（列表顯示）", name: "excerpt", widget: "text" }
+              - { label: "內文", name: "body", widget: "text", hint: "段落之間請空一行" }
+
+  # ---------- 成果與故事 ----------
+  - name: "stories"
+    label: "成果與故事"
+    files:
+      - name: "stories"
+        label: "故事列表"
+        file: "public/content/stories.json"
+        format: json
+        fields:
+          - label: "故事"
+            name: "items"
+            widget: "list"
+            label_singular: "一則故事"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "網址代碼（英文/數字，需唯一）", name: "id", widget: "string" }
+              - { label: "標題", name: "title", widget: "string" }
+              - { label: "照片", name: "image", widget: "image", required: false }
+              - { label: "金句", name: "quote", widget: "string", required: false }
+              - { label: "故事內容", name: "body", widget: "text" }
+
+  # ---------- 基本資訊 ----------
+  - name: "settings"
+    label: "基本聯絡資訊"
+    files:
+      - name: "settings"
+        label: "協會資訊"
+        file: "public/content/settings.json"
+        format: json
+        fields:
+          - { label: "協會名稱", name: "orgName", widget: "string" }
+          - { label: "標語", name: "slogan", widget: "string" }
+          - { label: "副標語", name: "subSlogan", widget: "string", required: false }
+          - { label: "電話", name: "phone", widget: "string" }
+          - { label: "電子信箱", name: "email", widget: "string", required: false }
+          - { label: "LINE ID", name: "lineId", widget: "string", required: false }
+          - { label: "臉書連結", name: "facebook", widget: "string", required: false }
+          - { label: "地址", name: "address", widget: "string" }
+          - { label: "地址備註", name: "addressNote", widget: "string", required: false }
+          - { label: "Google 地圖嵌入網址", name: "mapEmbed", widget: "string", required: false, hint: "Google 地圖 → 分享 → 嵌入地圖 → 複製 src 內的網址" }
+          - { label: "統一編號", name: "taxId", widget: "string", required: false }

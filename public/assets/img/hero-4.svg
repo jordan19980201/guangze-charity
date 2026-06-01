@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a1717"/>
+      <stop offset="100%" stop-color="#46280a"/>
+    </linearGradient>
+    <radialGradient id="v" cx="50%" cy="40%" r="75%">
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#g)"/>
+  <rect width="1920" height="1080" fill="url(#v)"/>
+  <g fill="#ffffff" fill-opacity="0.9" font-family="'Noto Serif TC',serif" text-anchor="middle">
+    <text x="50%" y="50%" font-size="90" font-weight="700">成為善的循環</text>
+    <text x="50%" y="630" font-size="36" fill-opacity="0.7">廣澤慈善協會　示意圖（請於後台替換真實照片）</text>
+  </g>
+</svg>
