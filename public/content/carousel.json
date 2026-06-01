@@ -1,25 +1,25 @@
 {
   "slides": [
     {
-      "image": "assets/img/hero-1.svg",
+      "image": "assets/img/hero-altar.jpg",
       "title": "取之社會，用之社會",
       "subtitle": "新竹市廣澤慈善協會　扶弱濟貧，傳遞一世情",
       "order": 1
     },
     {
-      "image": "assets/img/hero-2.svg",
-      "title": "百斤米，一世情",
-      "subtitle": "連續十六年，每年嘉惠竹竹苗約 1,000 戶弱勢家庭",
+      "image": "assets/img/hero-giving.jpg",
+      "title": "不只給予，更給予尊嚴",
+      "subtitle": "把愛心親手送到每一位需要的鄉親手中",
       "order": 2
     },
     {
-      "image": "assets/img/hero-3.svg",
-      "title": "不只給予，更給予尊嚴",
-      "subtitle": "義剪、健康篩檢、愛心餐點，照顧每一個需要的人",
+      "image": "assets/img/hero-children.jpg",
+      "title": "讓善，成為希望",
+      "subtitle": "捐資興學，陪伴每個孩子安心長大",
       "order": 3
     },
     {
-      "image": "assets/img/hero-4.svg",
+      "image": "assets/img/hero-event.jpg",
       "title": "邀您一起，成為善的循環",
       "subtitle": "有錢出錢，有力出力，與我們共襄善舉",
       "order": 4

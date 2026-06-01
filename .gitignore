@@ -12,6 +12,9 @@ dist/
 .env.*
 !.env.example
 
+# original source photos (deployable copies live in public/assets/img)
+主頁照片/
+
 # OS / editor
 .DS_Store
 Thumbs.db
