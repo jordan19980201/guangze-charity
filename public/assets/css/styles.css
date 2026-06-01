@@ -144,8 +144,9 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.35;
 .impact .section__head p { color: rgba(255,255,255,.92); }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 12px; }
 .stat { text-align: center; padding: 24px 12px; }
-.stat__num { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 700; color: var(--gold); line-height: 1; }
-.stat__unit { font-size: 1.1rem; color: var(--gold); margin-left: 4px; }
+.stat > div:first-child { white-space: nowrap; }
+.stat__num { font-family: var(--serif); font-size: clamp(1.9rem, 4.2vw, 3.1rem); font-weight: 700; color: var(--gold); line-height: 1; }
+.stat__unit { font-size: .95rem; color: var(--gold); margin-left: 3px; }
 .stat__label { margin-top: 12px; font-size: .98rem; opacity: .92; }
 
 /* ---------- Feature (rice) ---------- */
