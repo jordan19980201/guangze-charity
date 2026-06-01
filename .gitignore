@@ -14,6 +14,8 @@ dist/
 
 # original source photos (deployable copies live in public/assets/img)
 主頁照片/
+/我們是誰-廣澤慈善協會.jpg
+/LOGO.jpg
 
 # OS / editor
 .DS_Store
