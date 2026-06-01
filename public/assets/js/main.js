@@ -30,9 +30,8 @@
   ];
   const headerHTML =
     `<div class="header__inner">
-       <a class="brand" href="index.html">
-         <img src="assets/img/logo.jpg" alt="新竹市廣澤慈善協會">
-         <span class="brand__name">廣澤慈善協會</span>
+       <a class="brand" href="index.html" aria-label="新竹市廣澤慈善協會 首頁">
+         <img src="assets/img/logo.png" alt="新竹市廣澤慈善協會">
        </a>
        <button class="nav-toggle" aria-label="開啟選單"><span></span><span></span><span></span></button>
        <nav class="nav">
@@ -44,7 +43,7 @@
     `<div class="container">
        <div class="footer__grid">
          <div class="footer__brand">
-           <img src="assets/img/logo.jpg" alt="新竹市廣澤慈善協會">
+           <img src="assets/img/logo.png" alt="新竹市廣澤慈善協會">
            <p>秉持「取之社會、用之社會」的精神，扶弱濟貧，傳遞一世情。邀您一起成為善的循環。</p>
            <div class="social">
              <a data-link="facebook" href="#" aria-label="Facebook" target="_blank" rel="noopener">

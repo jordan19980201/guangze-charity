@@ -87,29 +87,24 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.35;
 .header {
   position: fixed; inset: 0 0 auto 0; height: var(--nav-h); z-index: 1000;
   display: flex; align-items: center;
-  transition: background .3s ease, box-shadow .3s ease;
+  background: rgba(251, 248, 243, .94);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+  transition: box-shadow .3s ease;
+  border-bottom: 1px solid rgba(200, 160, 76, .25);
 }
-.header.is-solid { background: rgba(251, 248, 243, .96); box-shadow: var(--shadow-sm); backdrop-filter: blur(6px); }
 .header__inner { width: min(100% - 48px, var(--maxw)); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; }
-.brand { display: flex; align-items: center; gap: 12px; }
-.brand img { height: 48px; width: auto; }
-.brand__name { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; color: var(--ink); white-space: nowrap; }
-.header:not(.is-solid) .brand__name { color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.35); }
-.header:not(.is-solid) .brand { background: rgba(255,255,255,.92); padding: 6px 14px 6px 8px; border-radius: 999px; }
-.header:not(.is-solid) .brand__name { color: var(--ink); text-shadow: none; }
+.brand { display: flex; align-items: center; }
+.brand img { height: 54px; width: auto; display: block; }
 
 .nav { display: flex; align-items: center; gap: 4px; }
-.nav a { padding: 10px 16px; border-radius: 999px; font-weight: 500; font-size: .98rem; transition: color .2s, background .2s; }
-.header.is-solid .nav a { color: var(--ink); }
-.header:not(.is-solid) .nav a { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.4); }
-.nav a:hover, .nav a.active { color: var(--red); background: rgba(158,27,27,.08); text-shadow: none; }
-.header:not(.is-solid) .nav a:hover, .header:not(.is-solid) .nav a.active { background: rgba(255,255,255,.9); }
-.nav a.nav__cta { background: var(--red); color: #fff !important; text-shadow: none; }
+.nav a { padding: 10px 15px; border-radius: 999px; font-weight: 500; font-size: .98rem; color: var(--ink); transition: color .2s, background .2s; }
+.nav a:hover, .nav a.active { color: var(--red); background: rgba(158,27,27,.08); }
+.nav a.nav__cta { background: var(--red); color: #fff !important; }
 .nav a.nav__cta:hover { background: var(--red-dark); }
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: 0; cursor: pointer; padding: 8px; z-index: 1100; }
 .nav-toggle span { width: 26px; height: 2px; background: var(--ink); border-radius: 2px; transition: .3s; }
-.header:not(.is-solid) .nav-toggle span { background: #fff; }
 
 /* ---------- Hero Carousel ---------- */
 .hero { position: relative; height: 100vh; min-height: 600px; overflow: hidden; }
