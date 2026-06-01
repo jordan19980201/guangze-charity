@@ -141,6 +141,7 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.35;
 .impact { background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%); color: #fff; }
 .impact .eyebrow { color: var(--gold); }
 .impact .section__head h2, .impact .mission p { color: #fff; }
+.impact .section__head p { color: rgba(255,255,255,.92); }
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 12px; }
 .stat { text-align: center; padding: 24px 12px; }
 .stat__num { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 700; color: var(--gold); line-height: 1; }
