@@ -62,7 +62,7 @@
          </div>
          <div>
            <h4>聯絡資訊</h4>
-           <a data-setting="address" href="#" style="cursor:default">　</a>
+           <p data-setting="address" style="opacity:.8;font-size:.95rem;padding:6px 0">　</p>
            <a data-setting="phone" href="#">　</a>
            <a data-setting="email" href="#">　</a>
          </div>
