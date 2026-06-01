@@ -8,7 +8,7 @@
 
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME   # ← 請改成你的 GitHub 帳號/儲存庫
+  repo: jordan19980201/guangze-charity   # ← 若你的儲存庫名稱不同，請改這裡
   branch: main
 
 # 本機測試用（搭配 npx @sveltia/cms-proxy-server，需安裝 Node）。

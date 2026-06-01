@@ -49,29 +49,36 @@ python -m http.server 8000
 
 ---
 
-## 🚀 部署上線（Cloudflare Pages，免費）
+## 🚀 部署上線（Vercel，免費）
+
+> 與「拾日設計」網站相同的流程，沿用既有 GitHub（jordan19980201）與 Vercel 帳號即可，不必重辦。
 
 ### 步驟 1：建立 GitHub 儲存庫
-1. 註冊 / 登入 [GitHub](https://github.com)（免費）
-2. 建立新的 repository，例如 `guangze-charity`
+1. 登入 [GitHub](https://github.com)（帳號 jordan19980201）
+2. 建立新的 repository，例如 `guangze-charity`（Public，不要勾 README/.gitignore）
 3. 把整個專案資料夾推上去：
    ```bash
-   git remote add origin https://github.com/你的帳號/guangze-charity.git
-   git branch -M main
+   git remote add origin https://github.com/jordan19980201/guangze-charity.git
    git push -u origin main
    ```
 
-### 步驟 2：連接 Cloudflare Pages
-1. 註冊 / 登入 [Cloudflare](https://dash.cloudflare.com)（免費）
-2. 進入 **Workers & Pages → Create → Pages → Connect to Git**
-3. 選擇剛才的 GitHub repo
-4. 建置設定：
-   - **Framework preset**：None
-   - **Build command**：留空
-   - **Build output directory**：`public`
-5. 按 **Save and Deploy**，幾十秒後網站就上線了 🎉
+### 步驟 2：在 Vercel 部署
+1. 登入 [Vercel](https://vercel.com)（用 GitHub 登入）
+2. **Add New… → Project → Import** 剛才的 GitHub repo
+3. 設定（本專案已附 `vercel.json`，多半會自動帶入）：
+   - **Framework Preset**：Other
+   - **Build Command**：留空
+   - **Output Directory**：`public`
+4. 按 **Deploy**，幾十秒後網站就上線了 🎉（會給你一個 `xxx.vercel.app` 免費網址）
 
-之後只要 `git push`，或透過後台存檔，網站都會自動更新。
+之後只要 `git push`，或透過後台存檔，Vercel 都會自動重新部署。
+
+### 步驟 3（選用）：綁定自訂網域
+1. 到遠振資訊（host.com.tw）購買網域，例如 `guangze-charity.org.tw`
+2. Vercel 專案 → **Settings → Domains → Add** 你的網域
+3. 依 Vercel 指示，到遠振的 DNS 設定填入 **A 記錄 / CNAME**（與拾日網站做法相同）
+
+> 備援方案：本專案同樣支援 Cloudflare Pages（Build command 留空、輸出目錄 `public`）。
 
 ---
 
