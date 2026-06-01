@@ -132,16 +132,18 @@
     return val; // facebook, mapEmbed, etc.
   };
   getJSON("content/settings.json").then((s) => {
+    const hideEl = (el) => { const li = el.closest("li"); (li || el).style.display = "none"; };
     // [data-link]: set href only, preserve inner content (icons, custom labels)
     $$("[data-link]").forEach((el) => {
       const val = s[el.getAttribute("data-link")];
-      if (val != null) el.href = hrefFor(el.getAttribute("data-link"), val);
+      if (val == null || val === "") { hideEl(el); return; }
+      el.href = hrefFor(el.getAttribute("data-link"), val);
     });
-    // [data-setting]: set text content (and href if it's a link)
+    // [data-setting]: set text content (and href if it's a link); hide if empty
     $$("[data-setting]").forEach((el) => {
       const key = el.getAttribute("data-setting");
       const val = s[key];
-      if (val == null) return;
+      if (val == null || val === "") { hideEl(el); return; }
       if (el.tagName === "A") el.href = hrefFor(key, val);
       el.textContent = val;
     });
