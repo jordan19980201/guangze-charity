@@ -11,10 +11,6 @@ backend:
   repo: jordan19980201/guangze-charity   # ← 若你的儲存庫名稱不同，請改這裡
   branch: main
 
-# 本機測試用（搭配 npx @sveltia/cms-proxy-server，需安裝 Node）。
-# 正式部署後可改為 false 或移除。
-local_backend: true
-
 # 後台介面語言
 locale: zh_Hant
 
