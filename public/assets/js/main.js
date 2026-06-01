@@ -278,4 +278,38 @@
       observeReveals();
     }).catch(() => {});
   }
+
+  /* ---------- Upcoming event floating badge ---------- */
+  getJSON("content/upcoming.json").then((u) => {
+    if (!u || !u.title) return;                       // 沒有設定 -> 不顯示
+    if (u.date) {
+      const end = new Date(u.date + "T23:59:59");
+      if (isNaN(end) || end.getTime() < Date.now()) return; // 日期已過 -> 自動隱藏
+    }
+    const wrap = document.createElement("div");
+    wrap.className = "upcoming";
+    wrap.innerHTML =
+      `<button class="upcoming__dot" id="up-dot" aria-label="近期活動">
+         <span class="upcoming__badge"></span>
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l16-5v12L4 14z"/><path d="M11 16.5a2.5 2.5 0 01-4.8-1"/></svg>
+       </button>
+       <div class="upcoming__card hide" id="up-card">
+         <button class="upcoming__close" id="up-close" aria-label="關閉">×</button>
+         <span class="upcoming__eyebrow"><span class="live"></span>近期活動</span>
+         <h4>${esc(u.title)}</h4>
+         ${u.date ? `<div class="upcoming__date">🗓 ${esc(fmtDate(u.date))}</div>` : ""}
+         ${u.subtitle ? `<p>${esc(u.subtitle)}</p>` : ""}
+         ${u.link ? `<a class="upcoming__link" href="${esc(u.link)}" target="_blank" rel="noopener">${esc(u.linkText || "看更多")} →</a>` : ""}
+       </div>`;
+    document.body.appendChild(wrap);
+    const card = $("#up-card", wrap), dot = $("#up-dot", wrap), close = $("#up-close", wrap);
+    let seen = false;
+    try { seen = sessionStorage.getItem("gz_up_seen") === "1"; } catch (e) {}
+    if (!seen) {
+      setTimeout(() => card.classList.remove("hide"), 1200);
+      try { sessionStorage.setItem("gz_up_seen", "1"); } catch (e) {}
+    }
+    dot.addEventListener("click", () => card.classList.toggle("hide"));
+    close.addEventListener("click", () => card.classList.add("hide"));
+  }).catch(() => {});
 })();

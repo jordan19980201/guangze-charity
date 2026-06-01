@@ -24,6 +24,18 @@
       },
     },
     {
+      key: "upcoming", file: "upcoming.json", label: "近期活動圈圈", title: "近期活動小圈圈",
+      desc: "首頁左下角的浮動活動提醒。填了「活動標題」就會出現；到了「顯示到哪一天」之後會自動隱藏。想關閉就把標題清空。",
+      def: {},
+      objectFields: [
+        { k: "title", t: "text", l: "活動標題（留空＝不顯示圈圈）" },
+        { k: "subtitle", t: "textarea", l: "活動說明" },
+        { k: "date", t: "text", l: "顯示到哪一天（格式 2026-06-30，過了自動隱藏）" },
+        { k: "link", t: "text", l: "連結網址（例如臉書貼文）" },
+        { k: "linkText", t: "text", l: "連結文字（例如：前往臉書看更多）" },
+      ],
+    },
+    {
       key: "impact", file: "impact.json", label: "影響力數據", title: "首頁影響力數據",
       desc: "首頁紅色區塊的數字。",
       def: { intro: "", stats: [], note: "" },
