@@ -61,7 +61,8 @@
          </div>
          <div>
            <h4>聯絡資訊</h4>
-           <p data-setting="address" style="opacity:.8;font-size:.95rem;padding:6px 0">　</p>
+           <p data-setting="orgName" style="color:#fff;font-weight:700;padding:2px 0">新竹市廣澤慈善協會</p>
+           <p data-setting="address" style="opacity:.8;font-size:.95rem;padding:4px 0">　</p>
            <a data-setting="phone" href="#">　</a>
            <a data-setting="email" href="#">　</a>
          </div>
@@ -279,13 +280,23 @@
     }).catch(() => {});
   }
 
-  /* ---------- Upcoming event floating badge ---------- */
-  getJSON("content/upcoming.json").then((u) => {
-    if (!u || !u.title) return;                       // 沒有設定 -> 不顯示
-    if (u.date) {
-      const end = new Date(u.date + "T23:59:59");
-      if (isNaN(end) || end.getTime() < Date.now()) return; // 日期已過 -> 自動隱藏
-    }
+  /* ---------- Upcoming events: section + floating badge ---------- */
+  const monthDay = (d) => { const dt = new Date(d); return isNaN(dt) ? { m: "", d: "" } : { m: (dt.getMonth() + 1) + " 月", d: dt.getDate() }; };
+  const eventCard = (e) => {
+    const md = monthDay(e.date);
+    const meta = [e.time ? "🕒 " + e.time : "", e.location ? "📍 " + e.location : ""]
+      .filter(Boolean).map((s) => `<span>${esc(s)}</span>`).join("");
+    return `<article class="event-card reveal">
+        <div class="event-card__date"><div class="event-card__month">${esc(md.m)}</div><div class="event-card__day">${esc(md.d)}</div></div>
+        <div class="event-card__body">
+          <h3>${esc(e.title)}</h3>
+          ${meta ? `<div class="event-card__meta">${meta}</div>` : ""}
+          ${e.note ? `<p>${esc(e.note)}</p>` : ""}
+          ${e.link ? `<a class="event-card__link" href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.linkText || "看更多")} →</a>` : ""}
+        </div>
+      </article>`;
+  };
+  function buildBadge(e) {
     const wrap = document.createElement("div");
     wrap.className = "upcoming";
     wrap.innerHTML =
@@ -296,20 +307,32 @@
        <div class="upcoming__card hide" id="up-card">
          <button class="upcoming__close" id="up-close" aria-label="關閉">×</button>
          <span class="upcoming__eyebrow"><span class="live"></span>近期活動</span>
-         <h4>${esc(u.title)}</h4>
-         ${u.date ? `<div class="upcoming__date">🗓 ${esc(fmtDate(u.date))}</div>` : ""}
-         ${u.subtitle ? `<p>${esc(u.subtitle)}</p>` : ""}
-         ${u.link ? `<a class="upcoming__link" href="${esc(u.link)}" target="_blank" rel="noopener">${esc(u.linkText || "看更多")} →</a>` : ""}
+         <h4>${esc(e.title)}</h4>
+         ${e.date ? `<div class="upcoming__date">🗓 ${esc(fmtDate(e.date))}${e.time ? "　" + esc(e.time) : ""}</div>` : ""}
+         ${e.note ? `<p>${esc(e.note)}</p>` : ""}
+         ${e.link ? `<a class="upcoming__link" href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.linkText || "看更多")} →</a>` : ""}
        </div>`;
     document.body.appendChild(wrap);
     const card = $("#up-card", wrap), dot = $("#up-dot", wrap), close = $("#up-close", wrap);
     let seen = false;
-    try { seen = sessionStorage.getItem("gz_up_seen") === "1"; } catch (e) {}
-    if (!seen) {
-      setTimeout(() => card.classList.remove("hide"), 1200);
-      try { sessionStorage.setItem("gz_up_seen", "1"); } catch (e) {}
-    }
+    try { seen = sessionStorage.getItem("gz_up_seen") === "1"; } catch (e2) {}
+    if (!seen) { setTimeout(() => card.classList.remove("hide"), 1200); try { sessionStorage.setItem("gz_up_seen", "1"); } catch (e2) {} }
     dot.addEventListener("click", () => card.classList.toggle("hide"));
     close.addEventListener("click", () => card.classList.add("hide"));
+  }
+  getJSON("content/events.json").then((data) => {
+    const items = (data.items || []).filter((e) => e && e.title);
+    const future = items.filter((e) => {
+      if (!e.date) return true;
+      const end = new Date(e.date + "T23:59:59");
+      return !isNaN(end) && end.getTime() >= Date.now();   // 過期自動隱藏
+    }).sort((a, b) => new Date(a.date) - new Date(b.date));
+    const listEl = $("#events-list"), sec = $("#events-section");
+    if (listEl && future.length) {
+      listEl.innerHTML = future.map(eventCard).join("");
+      if (sec) sec.style.display = "";
+      observeReveals();
+    }
+    if (future.length) buildBadge(future[0]);            // 小圈圈顯示最近的一個
   }).catch(() => {});
 })();

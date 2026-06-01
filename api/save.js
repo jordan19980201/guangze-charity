@@ -1,6 +1,6 @@
 const { getUser, readJson, ghGet, ghPut } = require("../lib/cms.js");
 
-const ALLOWED = { "news.json": 1, "stories.json": 1, "carousel.json": 1, "impact.json": 1, "settings.json": 1, "upcoming.json": 1 };
+const ALLOWED = { "news.json": 1, "stories.json": 1, "carousel.json": 1, "impact.json": 1, "settings.json": 1, "events.json": 1 };
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") { res.status(405).json({ error: "method" }); return; }
