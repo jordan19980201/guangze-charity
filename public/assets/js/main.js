@@ -291,6 +291,52 @@
   }
 
   /* ---------- Worship page ---------- */
+  // 神尊互動：滑鼠移動時光暈跟隨
+  const deityWrap = $("#deity");
+  if (deityWrap) {
+    const halo = deityWrap.querySelector(".worship__halo");
+    let raf = 0, pendingX = 50, pendingY = 40;
+    const apply = () => {
+      raf = 0;
+      if (halo) halo.style.background = `radial-gradient(circle at ${pendingX}% ${pendingY}%, rgba(255,210,140,.8), rgba(200,160,76,.22) 36%, rgba(200,160,76,0) 68%)`;
+    };
+    deityWrap.addEventListener("mousemove", (e) => {
+      const r = deityWrap.getBoundingClientRect();
+      pendingX = ((e.clientX - r.left) / r.width) * 100;
+      pendingY = ((e.clientY - r.top) / r.height) * 100;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    deityWrap.addEventListener("mouseleave", () => {
+      pendingX = 50; pendingY = 40;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+
+    // 點擊神尊：漣漪 + 書法字飛升 + 計數小光點
+    const deityImg = deityWrap.querySelector("img");
+    const flyChars = ["禮", "敬", "善", "恩", "孝", "福", "慈", "願"];
+    if (deityImg) deityImg.addEventListener("click", (e) => {
+      // 漣漪
+      const ripple = document.createElement("div");
+      ripple.className = "worship__ripple";
+      const r = deityImg.getBoundingClientRect();
+      const dr = deityWrap.getBoundingClientRect();
+      ripple.style.left = (r.left - dr.left) + "px";
+      ripple.style.top = (r.top - dr.top) + "px";
+      ripple.style.width = r.width + "px";
+      ripple.style.height = r.height + "px";
+      deityWrap.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 1200);
+      // 書法字飛升
+      const fly = document.createElement("div");
+      fly.className = "worship__charfly";
+      fly.textContent = flyChars[Math.floor(Math.random() * flyChars.length)];
+      fly.style.left = (e.clientX - dr.left) + "px";
+      fly.style.top = (e.clientY - dr.top) + "px";
+      deityWrap.appendChild(fly);
+      setTimeout(() => fly.remove(), 1700);
+    });
+  }
+
   // 蓮花花瓣動畫
   function dropPetals() {
     const wrap = $("#petals"); if (!wrap) return;

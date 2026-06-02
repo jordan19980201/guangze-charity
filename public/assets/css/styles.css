@@ -420,13 +420,14 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .worship-float__label {
   background: #fff; color: var(--ink); font-size: .92rem; font-weight: 700;
   height: 38px; line-height: 38px; align-self: center;
-  border-radius: 999px; padding: 0 4px 0 16px;
-  max-width: 0; overflow: hidden; white-space: nowrap;
-  transform: translateX(14px);
-  transition: max-width .35s ease, padding .35s ease;
+  border-radius: 999px;
+  max-width: 0; padding: 0; border: 0; opacity: 0;
+  overflow: hidden; white-space: nowrap;
+  transform: translateX(-14px);
+  transition: max-width .35s ease, padding .35s ease, opacity .2s ease;
   box-shadow: var(--shadow-sm);
 }
-.worship-float:hover .worship-float__label { max-width: 130px; padding: 0 22px 0 18px; }
+.worship-float:hover .worship-float__label { max-width: 130px; padding: 0 22px 0 22px; opacity: 1; }
 .worship-float:hover .worship-float__icon { transform: scale(1.1) rotate(-8deg); }
 .worship-float:active .worship-float__icon { transform: scale(.94); }
 
