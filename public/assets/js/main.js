@@ -410,14 +410,30 @@
       } catch (e) {}
     }).catch(() => {});
 
+    // 自動倒數到隔日 00:00 才能再抽
+    let countdownTimer = 0;
+    function updateAgainBtn() {
+      const btn = $("#oracle-again"); if (!btn) return;
+      const now = new Date();
+      const tom = new Date(now); tom.setDate(now.getDate() + 1); tom.setHours(0, 0, 0, 0);
+      const diff = tom - now;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      btn.textContent = `明日 00:00 可再抽（剩 ${h} 小時 ${m} 分）`;
+      btn.disabled = true;
+      btn.style.cursor = "not-allowed";
+    }
+
     function showOracle(item, alreadyDrawn) {
       $("#oracle-no").textContent = item.no;
       $("#oracle-title").textContent = item.title;
       $("#oracle-verse").textContent = item.verse;
       $("#oracle-modern").textContent = item.modern;
-      $("#oracle-hint").textContent = alreadyDrawn ? "（今日已抽過，明日可再抽一籤）" : "本籤僅供靜心反思，誠心向善，自得平安。";
+      $("#oracle-hint").textContent = alreadyDrawn ? "（今日已抽過，需待午夜 00:00 後才可再抽）" : "本籤僅供靜心反思，誠心向善，自得平安。";
       oraclePlaceholder.hidden = true;
       $("#oracle-content").hidden = false;
+      updateAgainBtn();
+      if (!countdownTimer) countdownTimer = setInterval(updateAgainBtn, 60000);
     }
     $("#oracle-draw").addEventListener("click", () => {
       if (!pool.length) return;
@@ -425,11 +441,7 @@
       try { localStorage.setItem("gz_oracle", JSON.stringify({ date: new Date().toISOString().slice(0, 10), item })); } catch (e) {}
       showOracle(item, false);
     });
-    $("#oracle-again").addEventListener("click", () => {
-      try { localStorage.removeItem("gz_oracle"); } catch (e) {}
-      oraclePlaceholder.hidden = false;
-      $("#oracle-content").hidden = true;
-    });
+    // 「明日再抽」按鈕 disabled，按了沒反應（必須等到隔日 00:00）
   }
 
   /* ---------- Categories page (services) ---------- */
