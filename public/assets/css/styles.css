@@ -536,19 +536,6 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
   backdrop-filter: blur(10px); animation: tossResultIn .6s ease both;
   text-align: center;
 }
-/* 擲筊結果照片 */
-.toss__result__img {
-  width: 200px; height: 200px; object-fit: contain; margin: 0 auto 14px;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,.5));
-  animation: poeResultIn .8s cubic-bezier(.34,1.6,.64,1) .1s both;
-}
-@keyframes poeResultIn {
-  0% { opacity: 0; transform: scale(.5) rotate(-12deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0); }
-}
-@media (max-width: 600px) {
-  .toss__result__img { width: 160px; height: 160px; }
-}
 @keyframes tossResultIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
 .toss__result__halo {
   position: absolute; inset: -2px; border-radius: 16px; pointer-events: none;

@@ -403,13 +403,13 @@
     const tossAgain = $("#toss-again");
     // 機率：聖筊較常見、笑筊次之、陰筊較少（符合「誠心祈福」氛圍）
     const outcomes = [
-      { type: "yang-yin", name: "聖筊", eyebrow: "應允 SHENG", cls: "is-yang", img: "assets/img/toss/poe-sheng.png",
+      { type: "yang-yin", name: "聖筊", eyebrow: "應允 SHENG", cls: "is-yang",
         text: "廣澤尊王應允您的祈願。誠心存善、行得正，這份善願必有迴響。" },
-      { type: "yang-yang", name: "笑筊", eyebrow: "莞爾 XIAO", cls: "is-laugh", img: "assets/img/toss/poe-xiao.png",
-        text: "廣澤尊王莞爾一笑。您的祈願或時機尚需斟酌，請再靜心思量、調整方向。" },
-      { type: "yin-yin", name: "陰筊", eyebrow: "慈悲 YIN", cls: "is-yin", img: "assets/img/toss/poe-yin.png",
+      { type: "yang-yang", name: "陰筊", eyebrow: "慎思 YIN", cls: "is-yin",
         text: "廣澤尊王慈悲指引。請先回頭省思自身，或更虔誠地祈求，再來請示。" },
-      { type: "yang-yin", name: "立筊", eyebrow: "✨ 奇蹟 LI", cls: "is-li", img: "assets/img/toss/poe-li.png",
+      { type: "yin-yin", name: "笑筊", eyebrow: "莞爾 XIAO", cls: "is-laugh",
+        text: "廣澤尊王莞爾一笑。您的祈願或時機尚需斟酌，請再靜心思量、調整方向。" },
+      { type: "yang-yin", name: "立筊", eyebrow: "✨ 奇蹟 LI", cls: "is-li",
         text: "立筊出現！廣澤尊王給您最特別的指引——靜下心，您必有非凡的啟示。（罕見彩蛋）" },
     ];
     function pick() {
@@ -442,8 +442,6 @@
         if (tossName) tossName.textContent = o.name;
         if (tossEb) tossEb.textContent = o.eyebrow;
         if (tossText) tossText.textContent = o.text;
-        const img = $("#toss-result-img");
-        if (img) { img.src = o.img; img.alt = o.name; }
         if (result) { result.classList.add(o.cls); result.hidden = false; }
         tossBtn.disabled = false;
       }, 1700);
