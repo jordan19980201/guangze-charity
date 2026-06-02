@@ -185,9 +185,14 @@ strong, b { font-family: inherit; font-weight: 700; }
 .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
 .news-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line); transition: transform .25s, box-shadow .25s; display: flex; flex-direction: column; }
 .news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
-.news-card__img { aspect-ratio: 4/3; overflow: hidden; }
+.news-card__img { aspect-ratio: 4/3; overflow: hidden; background: var(--cream); }
 .news-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
 .news-card:hover .news-card__img img { transform: scale(1.06); }
+/* 寬幅合照不裁人：以特定來源檔名套用 contain */
+.news-card__img img[src*="scene-thanks-letter"],
+.news-card__img img[src*="all-members"] { object-fit: contain; }
+.news-card:hover .news-card__img img[src*="scene-thanks-letter"],
+.news-card:hover .news-card__img img[src*="all-members"] { transform: scale(1.02); }
 .news-card__body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
 .news-card__date { color: var(--gold-dark); font-size: .85rem; font-weight: 700; letter-spacing: .05em; }
 .news-card__body h3 { font-size: 1.2rem; margin: 10px 0; }
