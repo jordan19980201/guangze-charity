@@ -395,12 +395,18 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .worship-float { display: flex; align-items: center; gap: 0; background: transparent; border: 0; cursor: pointer; padding: 0; font-family: inherit; }
 .worship-float__icon {
   width: 60px; height: 60px; border-radius: 50%;
-  display: grid; place-items: center;
+  display: flex; align-items: center; justify-content: center;
   position: relative; flex-shrink: 0;
   box-shadow: var(--shadow-md);
   transition: transform .2s ease;
 }
-.worship-float__char { font-family: var(--serif); font-size: 1.95rem; font-weight: 900; line-height: 1; letter-spacing: -.02em; transform: translateY(1px); }
+.worship-float__char {
+  font-family: var(--serif); font-size: 1.95rem; font-weight: 900;
+  line-height: 1; letter-spacing: 0;
+  display: block; text-align: center;
+  /* Noto Serif TC 字框上緣留白偏多，補一點視覺差讓字在圓心 */
+  transform: translateY(.06em);
+}
 .worship-float--pray .worship-float__icon {
   background: radial-gradient(circle at 30% 30%, #c33b3b 0%, #9e1b1b 55%, #5c0f0f 100%);
   border: 2px solid #ffd96b;
