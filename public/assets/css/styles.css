@@ -386,12 +386,11 @@ strong, b { font-family: inherit; font-weight: 700; }
 body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .worship-float { display: flex; align-items: center; gap: 0; background: transparent; border: 0; cursor: pointer; padding: 0; font-family: inherit; }
 .worship-float__icon {
-  width: 64px; height: 64px; border-radius: 50%;
+  width: 60px; height: 60px; border-radius: 50%;
   display: grid; place-items: center;
   position: relative; flex-shrink: 0;
   box-shadow: var(--shadow-md);
-  transition: transform .35s ease;
-  animation: floatBob 2.6s infinite ease-in-out;
+  transition: transform .2s ease;
 }
 .worship-float__char { font-family: var(--serif); font-size: 1.95rem; font-weight: 900; line-height: 1; letter-spacing: -.02em; transform: translateY(1px); }
 .worship-float--pray .worship-float__icon {
@@ -402,19 +401,17 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .worship-float--oracle .worship-float__icon {
   background: radial-gradient(circle at 30% 30%, #e3c275 0%, #c8a04c 55%, #8a6620 100%);
   border: 2px solid #fff7e2;
-  animation-delay: -1.3s;
 }
 .worship-float--oracle .worship-float__char { color: #fff; text-shadow: 0 1px 2px rgba(122,77,18,.6); }
 
-/* 脈動光圈 */
-.worship-float__icon::before, .worship-float__icon::after {
-  content: ""; position: absolute; inset: -3px; border-radius: 50%;
+/* 脈動光圈（單環、跟大聲公一致） */
+.worship-float__icon::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
   border: 2px solid currentColor;
-  animation: pulseRing 2.4s infinite;
+  animation: pulseRing 2s infinite;
 }
-.worship-float--pray .worship-float__icon::before, .worship-float--pray .worship-float__icon::after { color: #ffd96b; }
-.worship-float--oracle .worship-float__icon::before, .worship-float--oracle .worship-float__icon::after { color: #fff; }
-.worship-float__icon::after { animation-delay: 1.2s; }
+.worship-float--pray .worship-float__icon::before { color: var(--red); }
+.worship-float--oracle .worship-float__icon::before { color: var(--gold); }
 
 /* 標籤（hover 才展開） */
 .worship-float__label {
@@ -428,11 +425,10 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
   box-shadow: var(--shadow-sm);
 }
 .worship-float:hover .worship-float__label { max-width: 130px; padding: 0 22px 0 22px; opacity: 1; }
-.worship-float:hover .worship-float__icon { transform: scale(1.1) rotate(-8deg); }
-.worship-float:active .worship-float__icon { transform: scale(.94); }
+.worship-float:hover .worship-float__icon { transform: scale(1.06); }
+.worship-float:active .worship-float__icon { transform: scale(.96); }
 
-@keyframes floatBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-@keyframes pulseRing { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.55); } }
+@keyframes pulseRing { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
 
 @media (max-width: 600px) {
   .worship-floats { left: 14px; bottom: 90px; gap: 10px; }
