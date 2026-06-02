@@ -470,11 +470,11 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
   position: absolute; inset: 0;
   backface-visibility: hidden;
 }
-.poe__face svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 4px 6px rgba(0,0,0,.45)); }
+.poe__face img { width: 100%; height: 100%; display: block; object-fit: contain; filter: drop-shadow(0 4px 6px rgba(0,0,0,.45)); }
 /* 反面翻過去 */
 .poe__face--back { transform: rotateY(180deg); }
 /* 右邊聖筊水平鏡像（兩個合在一起像滿月） */
-.poe--right .poe__face svg { transform: scaleX(-1); }
+.poe--right .poe__face img { transform: scaleX(-1); }
 .poe__shadow {
   position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
   width: 96px; height: 18px; border-radius: 50%;
