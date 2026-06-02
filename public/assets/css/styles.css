@@ -442,11 +442,12 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .toss-bg {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(circle at 50% 35%, rgba(251,192,74,.22), transparent 55%),
-    linear-gradient(180deg, rgba(26,8,8,.85) 0%, rgba(26,8,8,.6) 50%, rgba(26,8,8,.95) 100%),
-    url("../img/news/poster-rice-16.jpg") center 30% / cover;
-  filter: saturate(1.05);
+    radial-gradient(ellipse at 50% 30%, rgba(251,192,74,.28), transparent 55%),
+    linear-gradient(180deg, rgba(20,5,5,.78) 0%, rgba(20,5,5,.55) 45%, rgba(20,5,5,.92) 100%),
+    url("../img/hero-altar.jpg") center 25% / cover fixed;
+  filter: saturate(1.08);
 }
+@media (max-width: 800px) { .toss-bg { background-attachment: scroll; } }
 .toss-section .section__head h2 { color: #fff; text-shadow: 0 2px 18px rgba(0,0,0,.55); }
 .toss-section .section__head p { color: rgba(255,255,255,.85); }
 .toss-section .section__head .eyebrow { color: var(--gold); }
@@ -480,23 +481,33 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .poe--left .poe__inner { transform: rotateZ(8deg); }
 .poe--right .poe__inner { transform: rotateZ(-8deg); }
 
-/* 擲筊動畫：飛起、翻轉、落下 */
-.toss__poe.tossing { animation: poeToss 1.6s cubic-bezier(.4, 0, .2, 1) forwards; }
-.poe--left.tossing { --tx: -50px; --rotz: -380deg; }
-.poe--right.tossing { --tx: 50px; --rotz: 380deg; }
+/* 擲筊動畫：飛起、翻轉、落下（更流暢） */
+.toss__poe.tossing { animation: poeToss 1.9s cubic-bezier(.32, .04, .29, 1) forwards; }
+.poe--left.tossing  { --tx: -60px; --rotz: -420deg; }
+.poe--right.tossing { --tx:  60px; --rotz:  420deg; animation-delay: .05s; }
 @keyframes poeToss {
   0%   { transform: translate(0, 0) rotateZ(0); }
-  35%  { transform: translate(calc(var(--tx) * .6), -180px) rotateZ(calc(var(--rotz) * .4)); }
-  65%  { transform: translate(calc(var(--tx) * .9), -100px) rotateZ(calc(var(--rotz) * .75)); }
+  18%  { transform: translate(calc(var(--tx) * .25), -130px) rotateZ(calc(var(--rotz) * .25)); }
+  38%  { transform: translate(calc(var(--tx) * .55), -220px) rotateZ(calc(var(--rotz) * .55)); }
+  60%  { transform: translate(calc(var(--tx) * .82), -170px) rotateZ(calc(var(--rotz) * .82)); }
+  82%  { transform: translate(calc(var(--tx) * .96), -40px) rotateZ(calc(var(--rotz) * .96)); }
+  92%  { transform: translate(var(--tx), 8px) rotateZ(var(--rotz)); }
   100% { transform: translate(var(--tx), 0) rotateZ(var(--rotz)); }
 }
 /* 翻轉 - 結束時的正反面 */
-.toss__poe.tossing .poe__inner { animation: poeFlip 1.6s linear forwards; }
+.toss__poe.tossing .poe__inner { animation: poeFlip 1.9s cubic-bezier(.4, .1, .3, 1) forwards; }
 .toss__poe.tossing[data-final="yang"] .poe__inner { --final-y: 0deg; }
 .toss__poe.tossing[data-final="yin"] .poe__inner { --final-y: 180deg; }
 @keyframes poeFlip {
   0% { transform: rotateY(0); }
   100% { transform: rotateY(var(--final-y, 720deg)); }
+}
+/* 影子隨高度變化 */
+.toss__poe.tossing ~ .poe__shadow, .toss__poe.tossing .poe__shadow { animation: shadowFade 1.9s ease-in-out forwards; }
+.poe__shadow { transition: opacity .3s, transform .3s; }
+@keyframes shadowFade {
+  0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+  35% { opacity: .25; transform: translateX(-50%) scale(.5); }
 }
 
 /* 擲筊按鈕（書法字） */
@@ -540,24 +551,74 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
   .toss__result h3 { font-size: 1.6rem; }
 }
 
-/* ---------- Oracle (today's fortune) ---------- */
-.oracle { max-width: 640px; margin: 0 auto; }
-.oracle__card { background: linear-gradient(180deg, #fffdf6 0%, #fcf3df 100%); border: 1px solid var(--gold); border-radius: 18px; padding: 44px 36px; text-align: center; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
-.oracle__card::before, .oracle__card::after { content: ""; position: absolute; width: 60px; height: 60px; border: 2px solid var(--gold); opacity: .35; }
-.oracle__card::before { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
-.oracle__card::after { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
-.oracle__placeholder { padding: 30px 0; }
-.oracle__big { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); font-weight: 700; }
-.oracle__no { font-family: var(--serif); font-size: 1.1rem; color: var(--red); font-weight: 700; letter-spacing: .08em; margin-bottom: 4px; }
-.oracle__card h3 { font-family: var(--serif); font-size: clamp(1.6rem, 3.4vw, 2.2rem); color: var(--ink); margin-bottom: 8px; }
-.oracle__divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 18px auto; }
-.oracle__divider::before, .oracle__divider::after { content: ""; width: 40px; height: 1px; background: var(--gold); }
-.oracle__divider span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-.oracle__verse { font-family: var(--serif); font-size: 1.15rem; line-height: 2.2; color: var(--ink); white-space: pre-wrap; margin: 0; letter-spacing: .03em; }
-.oracle__modern { color: var(--ink-soft); font-size: .98rem; line-height: 1.9; margin-top: 14px; padding: 0 6px; }
+/* ---------- 古卷軸（今日籤詩）---------- */
+.oracle { max-width: 640px; margin: 0 auto; perspective: 1500px; }
+.scroll { display: flex; flex-direction: column; align-items: center; }
+
+/* 抽籤前的占位 */
+.scroll__placeholder { background: rgba(0,0,0,.42); border: 1px solid var(--gold); border-radius: 14px; padding: 44px 32px; text-align: center; backdrop-filter: blur(10px); max-width: 520px; margin: 0 auto; }
+.scroll__big { font-family: var(--serif); font-size: 1.6rem; color: var(--gold); font-weight: 700; letter-spacing: .18em; }
+.scroll__hint { color: rgba(255,255,255,.78); font-size: .98rem; margin-top: 12px; }
+
+/* 卷軸主體 */
+.scroll__container { display: flex; flex-direction: column; align-items: center; }
+
+/* 卷軸木軸 */
+.scroll__rod {
+  width: 320px; max-width: 88vw; height: 22px; position: relative; z-index: 3;
+  background: linear-gradient(180deg, #c89a4e 0%, #8a5a1f 30%, #6a420f 50%, #8a5a1f 70%, #c89a4e 100%);
+  border-radius: 11px; box-shadow: 0 4px 14px rgba(0,0,0,.5), inset 0 0 4px rgba(0,0,0,.3);
+}
+.scroll__rod::before, .scroll__rod::after {
+  content: ""; position: absolute; top: -10px; width: 38px; height: 42px;
+  border-radius: 12px 14px 14px 12px;
+  background: radial-gradient(ellipse at 35% 30%, #e0b56b 0%, #a0721f 55%, #5a380a 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,.55), inset -3px 0 4px rgba(0,0,0,.3);
+}
+.scroll__rod::before { left: -26px; }
+.scroll__rod::after  { right: -26px; }
+
+/* 紙張面板 — 展開動畫 */
+.scroll__paper {
+  width: 320px; max-width: 88vw;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 28px, rgba(120,80,30,.05) 28px 29px),
+    radial-gradient(ellipse at 50% 0%, rgba(220,180,120,.35), transparent 70%),
+    linear-gradient(180deg, #f9eccd 0%, #f5e1b9 50%, #efd4a3 100%);
+  box-shadow:
+    inset 6px 0 12px rgba(140,90,40,.18),
+    inset -6px 0 12px rgba(140,90,40,.18),
+    inset 0 4px 8px rgba(140,90,40,.12),
+    inset 0 -4px 8px rgba(140,90,40,.12);
+  position: relative;
+  max-height: 0; overflow: hidden;
+  transition: max-height 1.4s cubic-bezier(.32, .04, .29, 1), padding 1.4s cubic-bezier(.32, .04, .29, 1);
+  padding: 0 28px;
+}
+.scroll.is-open .scroll__paper { max-height: 1200px; padding: 36px 32px; }
+
+/* 紙張左右邊緣的舊感 */
+.scroll__paper::before, .scroll__paper::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 4px;
+  background: linear-gradient(90deg, rgba(140,90,40,.45), transparent);
+}
+.scroll__paper::before { left: 0; }
+.scroll__paper::after { right: 0; transform: scaleX(-1); }
+
+/* 紙上的內容 */
+.oracle__content { animation: scrollContentIn 1.6s cubic-bezier(.32, .04, .29, 1) both; text-align: center; }
+.scroll.is-open .oracle__content { animation-delay: .4s; }
+@keyframes scrollContentIn { 0%, 30% { opacity: 0; transform: translateY(-12px); } 100% { opacity: 1; transform: none; } }
+.oracle__no { font-family: var(--serif); font-size: 1.1rem; color: var(--red); font-weight: 700; letter-spacing: .12em; margin-bottom: 4px; }
+.scroll__paper h3 { font-family: var(--serif); font-size: clamp(1.7rem, 3.6vw, 2.3rem); color: var(--ink); margin-bottom: 8px; }
+.oracle__divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 16px auto; }
+.oracle__divider::before, .oracle__divider::after { content: ""; width: 36px; height: 1px; background: rgba(140,90,40,.55); }
+.oracle__divider span { width: 6px; height: 6px; border-radius: 50%; background: rgba(140,90,40,.7); }
+.oracle__verse { font-family: var(--serif); font-size: 1.1rem; line-height: 2.2; color: var(--ink); white-space: pre-wrap; margin: 0; letter-spacing: .04em; }
+.oracle__modern { color: var(--ink-soft); font-size: .96rem; line-height: 1.9; margin-top: 12px; padding: 0 4px; }
 .oracle__hint { color: var(--gold-dark); font-size: .85rem; font-weight: 700; margin-top: 10px; }
-@keyframes oracleIn { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: none; } }
-.oracle__content { animation: oracleIn .5s ease both; }
+
+@media (max-width: 600px) { .scroll__rod { width: 280px; } .scroll__paper { width: 280px; } .scroll__big { font-size: 1.35rem; } }
 
 /* ---------- Service categories (services page) ---------- */
 .cat { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 14px; padding: 28px 30px; margin-bottom: 26px; box-shadow: var(--shadow-sm); }

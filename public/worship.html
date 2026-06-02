@@ -155,32 +155,40 @@
     </div>
   </section>
 
-  <!-- 今日籤詩 -->
-  <section class="section section--cream2" id="section-oracle">
-    <div class="container">
+  <!-- 今日籤詩（與擲筊共用神廳背景） -->
+  <section class="section toss-section" id="section-oracle">
+    <div class="toss-bg"></div>
+    <div class="container" style="position:relative;z-index:2">
       <div class="section__head">
         <p class="eyebrow">今日籤詩</p>
-        <h2>抽一籤，靜心一刻</h2>
+        <h2>抽一籤，悟一事</h2>
         <div class="divider"><span></span></div>
-        <p id="oracle-intro" style="color:var(--ink-soft);font-size:.95rem"></p>
+        <p id="oracle-intro"></p>
       </div>
 
       <div class="oracle reveal">
-        <div class="oracle__card" id="oracle-card">
-          <div class="oracle__placeholder" id="oracle-placeholder">
-            <p class="oracle__big">求一籤，悟一事</p>
-            <p style="color:var(--ink-soft);margin-top:10px">點下「抽籤」靜心一秒，看看廣澤尊王今日要對您說什麼。</p>
-            <button class="btn btn--primary" id="oracle-draw" style="margin-top:18px">✦ 抽今日籤</button>
+        <div class="scroll" id="scroll">
+          <div class="scroll__placeholder" id="oracle-placeholder">
+            <p class="scroll__big">求一籤　悟一事</p>
+            <p class="scroll__hint">點下「抽籤」靜心一秒，看看廣澤尊王今日要對您說什麼。</p>
+            <button class="btn toss__btn" id="oracle-draw" style="margin-top:22px"><span class="toss__btn__char">抽</span><span class="toss__btn__char">籤</span></button>
           </div>
-          <div class="oracle__content" id="oracle-content" hidden>
-            <div class="oracle__no" id="oracle-no"></div>
-            <h3 id="oracle-title"></h3>
-            <div class="oracle__divider"><span></span></div>
-            <pre class="oracle__verse" id="oracle-verse"></pre>
-            <div class="oracle__divider"><span></span></div>
-            <p class="oracle__modern" id="oracle-modern"></p>
-            <p class="oracle__hint" id="oracle-hint">　</p>
-            <button class="btn btn--outline btn--sm" id="oracle-again" style="margin-top:14px">明日再抽一籤</button>
+
+          <div class="scroll__container" id="scroll-container" hidden>
+            <div class="scroll__rod scroll__rod--top"></div>
+            <div class="scroll__paper">
+              <div class="oracle__content" id="oracle-content">
+                <div class="oracle__no" id="oracle-no"></div>
+                <h3 id="oracle-title"></h3>
+                <div class="oracle__divider"><span></span></div>
+                <pre class="oracle__verse" id="oracle-verse"></pre>
+                <div class="oracle__divider"><span></span></div>
+                <p class="oracle__modern" id="oracle-modern"></p>
+                <p class="oracle__hint" id="oracle-hint">　</p>
+                <button class="btn btn--outline btn--sm" id="oracle-again" style="margin-top:14px">明日再抽一籤</button>
+              </div>
+            </div>
+            <div class="scroll__rod scroll__rod--bottom"></div>
           </div>
         </div>
       </div>

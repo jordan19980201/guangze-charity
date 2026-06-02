@@ -481,7 +481,13 @@
       $("#oracle-modern").textContent = item.modern;
       $("#oracle-hint").textContent = alreadyDrawn ? "（今日已抽過，需待午夜 00:00 後才可再抽）" : "本籤僅供靜心反思，誠心向善，自得平安。";
       oraclePlaceholder.hidden = true;
-      $("#oracle-content").hidden = false;
+      const container = $("#scroll-container");
+      const scroll = $("#scroll");
+      if (container) container.hidden = false;
+      // 觸發卷軸展開動畫
+      requestAnimationFrame(() => {
+        if (scroll) scroll.classList.add("is-open");
+      });
       updateAgainBtn();
       if (!countdownTimer) countdownTimer = setInterval(updateAgainBtn, 60000);
     }
