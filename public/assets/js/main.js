@@ -593,10 +593,13 @@
     const wrap = document.createElement("div");
     wrap.className = "upcoming";
     wrap.innerHTML =
-      `<button class="upcoming__dot" id="up-dot" aria-label="近期活動">
-         <span class="upcoming__badge"></span>
-         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l16-5v12L4 14z"/><path d="M11 16.5a2.5 2.5 0 01-4.8-1"/></svg>
-       </button>
+      `<div class="upcoming__row">
+         <button class="upcoming__dot" id="up-dot" aria-label="近期活動">
+           <span class="upcoming__badge"></span>
+           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l16-5v12L4 14z"/><path d="M11 16.5a2.5 2.5 0 01-4.8-1"/></svg>
+         </button>
+         <span class="upcoming__label">近期活動</span>
+       </div>
        <div class="upcoming__card hide" id="up-card">
          <button class="upcoming__close" id="up-close" aria-label="關閉">×</button>
          <span class="upcoming__eyebrow"><span class="live"></span>近期活動</span>
