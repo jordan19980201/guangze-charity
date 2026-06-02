@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>線上參拜｜新竹市廣澤慈善協會</title>
+  <meta name="description" content="廣澤尊王線上參拜，向廣澤尊王合十參拜，並抽一支今日籤詩，感受孝道與善行的精神指引。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="assets/img/logo.jpg" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">線上參拜</p>
+      <h1>合十之間，心安自在</h1>
+      <p>誠心向廣澤尊王禮敬，無論身在何處，皆可線上參拜、求得一籤指引。</p>
+    </div>
+  </section>
+
+  <!-- 參拜區 -->
+  <section class="section">
+    <div class="container">
+      <div class="worship">
+        <div class="worship__deity reveal">
+          <div class="worship__halo"></div>
+          <img src="assets/img/guangze-zunwang.jpg" alt="廣澤尊王" />
+          <div class="worship__incense" id="incense">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="worship__panel reveal">
+          <p class="eyebrow">敬禮廣澤尊王</p>
+          <h2>合十參拜</h2>
+          <p class="worship__hint">點下「合十參拜」並寫下您的祈願，協會將為您一同祈福。</p>
+
+          <div class="worship__form">
+            <label>祈願者姓名（可填筆名）
+              <input type="text" id="pray-name" maxlength="20" placeholder="例：林善心" />
+            </label>
+            <label>祈願類別
+              <select id="pray-type">
+                <option value="平安">闔家平安</option>
+                <option value="健康">身體健康</option>
+                <option value="學業">學業順利</option>
+                <option value="事業">事業有成</option>
+                <option value="姻緣">良緣早結</option>
+                <option value="孝親">家中長輩安康</option>
+                <option value="感恩">感恩祝福</option>
+                <option value="其他">其他祈願</option>
+              </select>
+            </label>
+            <label>祈願文（不公開，僅自留紀念）
+              <textarea id="pray-wish" rows="3" maxlength="200" placeholder="寫下您此刻的心願…"></textarea>
+            </label>
+            <button class="btn btn--primary worship__btn" id="pray-btn">🙏 合十參拜</button>
+            <p class="worship__count" id="pray-count">　</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 今日籤詩 -->
+  <section class="section section--cream2">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">今日籤詩</p>
+        <h2>抽一籤，靜心一刻</h2>
+        <div class="divider"><span></span></div>
+        <p id="oracle-intro" style="color:var(--ink-soft);font-size:.95rem"></p>
+      </div>
+
+      <div class="oracle reveal">
+        <div class="oracle__card" id="oracle-card">
+          <div class="oracle__placeholder" id="oracle-placeholder">
+            <p class="oracle__big">求一籤，悟一事</p>
+            <p style="color:var(--ink-soft);margin-top:10px">點下「抽籤」靜心一秒，看看廣澤尊王今日要對您說什麼。</p>
+            <button class="btn btn--primary" id="oracle-draw" style="margin-top:18px">✦ 抽今日籤</button>
+          </div>
+          <div class="oracle__content" id="oracle-content" hidden>
+            <div class="oracle__no" id="oracle-no"></div>
+            <h3 id="oracle-title"></h3>
+            <div class="oracle__divider"><span></span></div>
+            <pre class="oracle__verse" id="oracle-verse"></pre>
+            <div class="oracle__divider"><span></span></div>
+            <p class="oracle__modern" id="oracle-modern"></p>
+            <p class="oracle__hint" id="oracle-hint">　</p>
+            <button class="btn btn--outline btn--sm" id="oracle-again" style="margin-top:14px">明日再抽一籤</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="container">
+      <h2>有錢出錢，有力出力</h2>
+      <p>您的支持，將成為某個家庭故事裡最重要的轉折。</p>
+      <a class="btn btn--primary" href="get-involved.html">我要響應愛心</a>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+  <button class="to-top" aria-label="回到頂端">↑</button>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

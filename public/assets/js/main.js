@@ -26,6 +26,7 @@
     ["services.html", "我們的足跡"],
     ["news.html", "最新消息"],
     ["stories.html", "成果與故事"],
+    ["worship.html", "線上參拜"],
     ["contact.html", "聯絡我們"],
   ];
   const headerHTML =
@@ -61,14 +62,14 @@
          </div>
          <div>
            <h4>聯絡資訊</h4>
-           <p data-setting="orgName" style="color:#fff;font-weight:700;padding:2px 0">新竹市廣澤慈善協會</p>
+           <p data-setting="orgName" style="opacity:.8;font-size:.95rem;padding:4px 0">新竹市廣澤慈善協會</p>
            <p data-setting="address" style="opacity:.8;font-size:.95rem;padding:4px 0">　</p>
            <a data-setting="phone" href="#">　</a>
            <a data-setting="email" href="#">　</a>
          </div>
        </div>
        <div class="footer__bottom">
-         © <span data-year></span> 新竹市廣澤慈善協會　統一編號：50598756｜本網站照片為示意，將陸續更新為實際活動照片
+         © <span data-year></span> 新竹市廣澤慈善協會　統一編號：50598756｜立案字號：府社行字第1050212004號
        </div>
      </div>`;
   const headerEl = $("#site-header");
@@ -258,6 +259,83 @@
         observeReveals();
       }
     }).catch(() => { if (newsList) newsList.innerHTML = '<p class="empty">內容載入失敗，請稍後再試。</p>'; });
+  }
+
+  /* ---------- Worship page ---------- */
+  const prayBtn = $("#pray-btn");
+  if (prayBtn) {
+    const countEl = $("#pray-count");
+    // 載入累積參拜數
+    fetch("https://api.counterapi.dev/v1/guangze-charity/worship-total/?")
+      .then((r) => r.json()).then((d) => {
+        const n = (d && (d.count || d.Count)) || 0;
+        if (n > 0) countEl.textContent = `🪷 至今已有 ${n.toLocaleString()} 位信眾參拜`;
+      }).catch(() => {});
+
+    prayBtn.addEventListener("click", () => {
+      const name = ($("#pray-name").value || "").trim();
+      const type = $("#pray-type").value;
+      const wish = ($("#pray-wish").value || "").trim();
+      if (!name) { $("#pray-name").focus(); $("#pray-name").placeholder = "請填入您的姓名 🙏"; return; }
+      // 儀式感：禁用按鈕、顯示動畫、增量計數
+      prayBtn.disabled = true; prayBtn.textContent = "🙏 合十中…";
+      const incense = $("#incense"); if (incense) incense.classList.add("lit");
+      countEl.textContent = "✨ 廣澤尊王垂佑　善願已記";
+      fetch("https://api.counterapi.dev/v1/guangze-charity/worship-total/up")
+        .then((r) => r.json()).then((d) => {
+          const n = (d && (d.count || d.Count)) || 0;
+          setTimeout(() => {
+            prayBtn.classList.add("done"); prayBtn.textContent = "已合十參拜　謝謝您";
+            if (n > 0) countEl.textContent = `🪷 您是第 ${n.toLocaleString()} 位向廣澤尊王合十參拜的信眾`;
+            // 本地保存（不上傳），純粹紀念
+            try {
+              const log = JSON.parse(localStorage.getItem("gz_prayers") || "[]");
+              log.push({ name, type, wish, at: new Date().toISOString() });
+              localStorage.setItem("gz_prayers", JSON.stringify(log.slice(-10)));
+            } catch (e) {}
+          }, 1200);
+        }).catch(() => {
+          setTimeout(() => { prayBtn.classList.add("done"); prayBtn.textContent = "已合十參拜　謝謝您"; }, 1200);
+        });
+    });
+  }
+
+  /* ---------- Oracle (today's fortune) ---------- */
+  const oraclePlaceholder = $("#oracle-placeholder");
+  if (oraclePlaceholder) {
+    let pool = [];
+    getJSON("content/oracle.json").then((d) => {
+      pool = d.items || [];
+      const intro = $("#oracle-intro");
+      if (intro && d.intro) intro.textContent = d.intro;
+      // 已抽過就直接顯示
+      try {
+        const today = new Date().toISOString().slice(0, 10);
+        const saved = JSON.parse(localStorage.getItem("gz_oracle") || "null");
+        if (saved && saved.date === today) showOracle(saved.item, true);
+      } catch (e) {}
+    }).catch(() => {});
+
+    function showOracle(item, alreadyDrawn) {
+      $("#oracle-no").textContent = item.no;
+      $("#oracle-title").textContent = item.title;
+      $("#oracle-verse").textContent = item.verse;
+      $("#oracle-modern").textContent = item.modern;
+      $("#oracle-hint").textContent = alreadyDrawn ? "（今日已抽過，明日可再抽一籤）" : "本籤僅供靜心反思，誠心向善，自得平安。";
+      oraclePlaceholder.hidden = true;
+      $("#oracle-content").hidden = false;
+    }
+    $("#oracle-draw").addEventListener("click", () => {
+      if (!pool.length) return;
+      const item = pool[Math.floor(((Date.now() * 9301 + 49297) % 233280) / 233280 * pool.length)];
+      try { localStorage.setItem("gz_oracle", JSON.stringify({ date: new Date().toISOString().slice(0, 10), item })); } catch (e) {}
+      showOracle(item, false);
+    });
+    $("#oracle-again").addEventListener("click", () => {
+      try { localStorage.removeItem("gz_oracle"); } catch (e) {}
+      oraclePlaceholder.hidden = false;
+      $("#oracle-content").hidden = true;
+    });
   }
 
   /* ---------- Categories page (services) ---------- */

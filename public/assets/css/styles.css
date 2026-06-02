@@ -261,6 +261,51 @@ strong, b { font-family: inherit; font-weight: 700; }
 .to-top.show { opacity: 1; pointer-events: auto; }
 .to-top:hover { background: var(--red-dark); transform: translateY(-3px); }
 
+/* ---------- Worship page ---------- */
+.worship { display: grid; grid-template-columns: minmax(280px, 1fr) 1fr; gap: clamp(36px, 6vw, 80px); align-items: start; }
+.worship__deity { position: relative; display: grid; place-items: center; }
+.worship__halo { position: absolute; inset: 0; background: radial-gradient(circle at 50% 35%, rgba(200,160,76,.42), rgba(200,160,76,0) 60%); filter: blur(8px); pointer-events: none; }
+.worship__deity img { position: relative; max-width: 460px; width: 100%; border-radius: 22px; box-shadow: var(--shadow-lg); }
+.worship__incense { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); display: flex; gap: 22px; opacity: 0; transition: opacity .8s; pointer-events: none; }
+.worship__incense.lit { opacity: 1; }
+.worship__incense span { display: block; width: 3px; height: 90px; background: linear-gradient(to top, #6a3a14 0%, #a85e1d 30%, #ffb066 70%, #fff4d0 95%); border-radius: 1.5px; position: relative; }
+.worship__incense span::after { content: ""; position: absolute; top: -28px; left: 50%; transform: translateX(-50%); width: 14px; height: 24px; background: radial-gradient(ellipse, rgba(255,225,180,.85), rgba(255,225,180,0) 70%); filter: blur(6px); animation: smoke 3s infinite ease-out; }
+.worship__incense span:nth-child(2)::after { animation-delay: .6s; }
+.worship__incense span:nth-child(3)::after { animation-delay: 1.2s; }
+@keyframes smoke { 0% { opacity: .85; transform: translate(-50%, 0) scale(.6); } 100% { opacity: 0; transform: translate(calc(-50% + 12px), -60px) scale(1.6); } }
+
+.worship__panel h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); margin-bottom: 8px; }
+.worship__hint { color: var(--ink-soft); margin-bottom: 22px; }
+.worship__form label { display: block; font-size: .85rem; font-weight: 700; color: var(--ink-soft); margin-bottom: 14px; }
+.worship__form input, .worship__form select, .worship__form textarea { width: 100%; margin-top: 6px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-family: inherit; font-size: 1rem; color: var(--ink); }
+.worship__form input:focus, .worship__form select:focus, .worship__form textarea:focus { outline: 2px solid var(--gold); border-color: transparent; }
+.worship__form textarea { resize: vertical; min-height: 92px; }
+.worship__btn { width: 100%; padding: 14px; font-size: 1.05rem; }
+.worship__btn.done { background: var(--gold); color: var(--ink); pointer-events: none; }
+.worship__btn.done::before { content: "✓ "; }
+.worship__count { margin-top: 14px; font-size: .92rem; color: var(--gold-dark); font-weight: 700; text-align: center; }
+
+@media (max-width: 800px) { .worship { grid-template-columns: 1fr; } .worship__deity img { max-width: 360px; } }
+
+/* ---------- Oracle (today's fortune) ---------- */
+.oracle { max-width: 640px; margin: 0 auto; }
+.oracle__card { background: linear-gradient(180deg, #fffdf6 0%, #fcf3df 100%); border: 1px solid var(--gold); border-radius: 18px; padding: 44px 36px; text-align: center; box-shadow: var(--shadow-md); position: relative; overflow: hidden; }
+.oracle__card::before, .oracle__card::after { content: ""; position: absolute; width: 60px; height: 60px; border: 2px solid var(--gold); opacity: .35; }
+.oracle__card::before { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+.oracle__card::after { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+.oracle__placeholder { padding: 30px 0; }
+.oracle__big { font-family: var(--serif); font-size: 1.5rem; color: var(--ink); font-weight: 700; }
+.oracle__no { font-family: var(--serif); font-size: 1.1rem; color: var(--red); font-weight: 700; letter-spacing: .08em; margin-bottom: 4px; }
+.oracle__card h3 { font-family: var(--serif); font-size: clamp(1.6rem, 3.4vw, 2.2rem); color: var(--ink); margin-bottom: 8px; }
+.oracle__divider { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 18px auto; }
+.oracle__divider::before, .oracle__divider::after { content: ""; width: 40px; height: 1px; background: var(--gold); }
+.oracle__divider span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.oracle__verse { font-family: var(--serif); font-size: 1.15rem; line-height: 2.2; color: var(--ink); white-space: pre-wrap; margin: 0; letter-spacing: .03em; }
+.oracle__modern { color: var(--ink-soft); font-size: .98rem; line-height: 1.9; margin-top: 14px; padding: 0 6px; }
+.oracle__hint { color: var(--gold-dark); font-size: .85rem; font-weight: 700; margin-top: 10px; }
+@keyframes oracleIn { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: none; } }
+.oracle__content { animation: oracleIn .5s ease both; }
+
 /* ---------- Service categories (services page) ---------- */
 .cat { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 14px; padding: 28px 30px; margin-bottom: 26px; box-shadow: var(--shadow-sm); }
 .cat__head { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 14px; }
