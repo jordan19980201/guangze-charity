@@ -84,18 +84,59 @@
       </div>
 
       <div class="toss reveal">
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+          <defs>
+            <radialGradient id="poeFrontGrad" cx="40%" cy="32%" r="78%">
+              <stop offset="0%" stop-color="#ff9999"/>
+              <stop offset="22%" stop-color="#e84040"/>
+              <stop offset="55%" stop-color="#a51717"/>
+              <stop offset="100%" stop-color="#460606"/>
+            </radialGradient>
+            <linearGradient id="poeShine" x1="20%" y1="8%" x2="42%" y2="92%">
+              <stop offset="0%" stop-color="rgba(255,255,255,.6)"/>
+              <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+            <linearGradient id="poeBackGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+              <stop offset="0%" stop-color="#8a1414"/>
+              <stop offset="50%" stop-color="#7a1010"/>
+              <stop offset="100%" stop-color="#4a0606"/>
+            </linearGradient>
+            <symbol id="poeShape" viewBox="0 0 90 180" preserveAspectRatio="none">
+              <path d="M45 4 C24 4 11 30 11 65 C11 112 18 158 35 175 C38 178 52 178 55 175 C72 158 79 112 79 65 C79 30 66 4 45 4 Z"/>
+            </symbol>
+            <symbol id="poeFront" viewBox="0 0 90 180" preserveAspectRatio="none">
+              <use href="#poeShape" fill="url(#poeFrontGrad)" stroke="#2c0303" stroke-width=".9"/>
+              <!-- 高光 -->
+              <path d="M34 24 C26 38 23 65 25 95 C26 118 30 140 35 152 C38 154 39 150 37 142 C32 122 28 90 30 60 C32 40 38 28 34 24 Z" fill="url(#poeShine)"/>
+              <!-- 右側暗影邊緣 -->
+              <path d="M59 28 C66 48 71 82 69 118 C68 144 62 162 56 172" fill="none" stroke="rgba(20,0,0,.45)" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- 頂端反光點 -->
+              <ellipse cx="42" cy="14" rx="6" ry="2.5" fill="rgba(255,255,255,.5)"/>
+            </symbol>
+            <symbol id="poeBack" viewBox="0 0 90 180" preserveAspectRatio="none">
+              <use href="#poeShape" fill="url(#poeBackGrad)" stroke="#1f0202" stroke-width=".9"/>
+              <!-- 木紋 -->
+              <line x1="45" y1="20" x2="45" y2="165" stroke="rgba(30,0,0,.55)" stroke-width=".7"/>
+              <line x1="36" y1="36" x2="36" y2="148" stroke="rgba(30,0,0,.4)" stroke-width=".5"/>
+              <line x1="54" y1="36" x2="54" y2="148" stroke="rgba(30,0,0,.4)" stroke-width=".5"/>
+              <!-- 整體陰影感 -->
+              <path d="M45 4 C24 4 11 30 11 65 C11 112 18 158 35 175 C38 178 52 178 55 175 C72 158 79 112 79 65 C79 30 66 4 45 4 Z" fill="rgba(0,0,0,.18)"/>
+            </symbol>
+          </defs>
+        </svg>
+
         <div class="toss__stage" id="toss-stage">
           <div class="toss__poe poe--left" data-side="left">
             <div class="poe__inner">
-              <div class="poe__face poe__face--front"></div>
-              <div class="poe__face poe__face--back"></div>
+              <div class="poe__face poe__face--front"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
+              <div class="poe__face poe__face--back"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
             </div>
             <div class="poe__shadow"></div>
           </div>
           <div class="toss__poe poe--right" data-side="right">
             <div class="poe__inner">
-              <div class="poe__face poe__face--front"></div>
-              <div class="poe__face poe__face--back"></div>
+              <div class="poe__face poe__face--front"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
+              <div class="poe__face poe__face--back"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
             </div>
             <div class="poe__shadow"></div>
           </div>
