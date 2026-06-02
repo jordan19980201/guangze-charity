@@ -262,6 +262,33 @@
   }
 
   /* ---------- Worship page ---------- */
+  // 書法浮動圈圈：點擊滾動到對應區塊
+  const floatPray = $("#float-pray"), floatOracle = $("#float-oracle");
+  if (floatPray) floatPray.addEventListener("click", () => {
+    const t = $(".worship"); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+    setTimeout(() => { const i = $("#pray-name"); if (i) i.focus(); }, 800);
+  });
+  if (floatOracle) floatOracle.addEventListener("click", () => {
+    const t = $(".oracle"); if (t) t.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  // 蓮花花瓣動畫
+  function dropPetals() {
+    const wrap = $("#petals"); if (!wrap) return;
+    wrap.innerHTML = "";
+    const emojis = ["🌸", "🌺", "🪷", "✨"];
+    for (let i = 0; i < 14; i++) {
+      const s = document.createElement("span");
+      s.textContent = emojis[i % emojis.length];
+      s.style.left = (Math.random() * 100) + "%";
+      s.style.animationDuration = (3 + Math.random() * 2) + "s";
+      s.style.animationDelay = (Math.random() * 1.2) + "s";
+      s.style.fontSize = (1.2 + Math.random() * 1) + "rem";
+      wrap.appendChild(s);
+    }
+    setTimeout(() => (wrap.innerHTML = ""), 6000);
+  }
+
   const prayBtn = $("#pray-btn");
   if (prayBtn) {
     const countEl = $("#pray-count");
@@ -280,6 +307,8 @@
       // 儀式感：禁用按鈕、顯示動畫、增量計數
       prayBtn.disabled = true; prayBtn.textContent = "🙏 合十中…";
       const incense = $("#incense"); if (incense) incense.classList.add("lit");
+      const deity = $("#deity"); if (deity) deity.classList.add("praying");
+      dropPetals();
       countEl.textContent = "✨ 廣澤尊王垂佑　善願已記";
       fetch("https://api.counterapi.dev/v1/guangze-charity/worship-total/up")
         .then((r) => r.json()).then((d) => {

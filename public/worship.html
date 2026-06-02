@@ -26,9 +26,15 @@
   <section class="section">
     <div class="container">
       <div class="worship">
-        <div class="worship__deity reveal">
+        <div class="worship__deity reveal" id="deity">
           <div class="worship__halo"></div>
+          <div class="worship__sparkles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span>
+          </div>
           <img src="assets/img/guangze-zunwang.jpg" alt="廣澤尊王" />
+          <div class="worship__petals" id="petals"></div>
           <div class="worship__incense" id="incense">
             <span></span><span></span><span></span>
           </div>
@@ -105,6 +111,18 @@
       <a class="btn btn--primary" href="get-involved.html">我要響應愛心</a>
     </div>
   </section>
+
+  <!-- 書法風格浮動圈圈 -->
+  <div class="worship-floats" aria-hidden="true">
+    <button class="worship-float worship-float--pray" id="float-pray" type="button" aria-label="合十參拜">
+      <span class="worship-float__label">合十參拜</span>
+      <span class="worship-float__icon"><span class="worship-float__char">拜</span></span>
+    </button>
+    <button class="worship-float worship-float--oracle" id="float-oracle" type="button" aria-label="抽今日籤">
+      <span class="worship-float__label">抽今日籤</span>
+      <span class="worship-float__icon"><span class="worship-float__char">籤</span></span>
+    </button>
+  </div>
 
   <footer id="site-footer"></footer>
   <button class="to-top" aria-label="回到頂端">↑</button>

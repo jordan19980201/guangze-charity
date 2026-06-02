@@ -263,9 +263,59 @@ strong, b { font-family: inherit; font-weight: 700; }
 
 /* ---------- Worship page ---------- */
 .worship { display: grid; grid-template-columns: minmax(280px, 1fr) 1fr; gap: clamp(36px, 6vw, 80px); align-items: start; }
-.worship__deity { position: relative; display: grid; place-items: center; }
-.worship__halo { position: absolute; inset: 0; background: radial-gradient(circle at 50% 35%, rgba(200,160,76,.42), rgba(200,160,76,0) 60%); filter: blur(8px); pointer-events: none; }
-.worship__deity img { position: relative; max-width: 460px; width: 100%; border-radius: 22px; box-shadow: var(--shadow-lg); }
+.worship__deity { position: relative; display: grid; place-items: center; padding: 20px; }
+.worship__halo {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(255,210,140,.7), rgba(200,160,76,.2) 35%, rgba(200,160,76,0) 65%);
+  filter: blur(20px); pointer-events: none;
+  animation: haloBreathe 4s infinite ease-in-out;
+}
+@keyframes haloBreathe { 0%, 100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+
+/* 飄動的金色光點 */
+.worship__sparkles { position: absolute; inset: 0; pointer-events: none; }
+.worship__sparkles span {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: radial-gradient(circle, #fff6c8 0%, #fbc04a 60%, transparent 80%);
+  box-shadow: 0 0 6px #fbc04a, 0 0 14px rgba(251,192,74,.6);
+  opacity: 0;
+  animation: sparkleFloat 4.5s infinite ease-in-out;
+}
+.worship__sparkles span:nth-child(1) { top: 12%; left: 8%; animation-delay: 0s; }
+.worship__sparkles span:nth-child(2) { top: 22%; right: 10%; animation-delay: .5s; }
+.worship__sparkles span:nth-child(3) { top: 38%; left: 4%; animation-delay: 1s; width: 4px; height: 4px; }
+.worship__sparkles span:nth-child(4) { top: 50%; right: 6%; animation-delay: 1.5s; }
+.worship__sparkles span:nth-child(5) { top: 62%; left: 12%; animation-delay: 2s; width: 5px; height: 5px; }
+.worship__sparkles span:nth-child(6) { top: 75%; right: 16%; animation-delay: 2.5s; }
+.worship__sparkles span:nth-child(7) { top: 8%; left: 50%; animation-delay: 3s; width: 4px; height: 4px; }
+.worship__sparkles span:nth-child(8) { top: 88%; left: 42%; animation-delay: 3.5s; }
+.worship__sparkles span:nth-child(9) { top: 30%; left: 95%; animation-delay: 1.8s; width: 5px; height: 5px; }
+.worship__sparkles span:nth-child(10) { top: 70%; left: 90%; animation-delay: 3.2s; }
+@keyframes sparkleFloat {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(.5); }
+  40%, 60% { opacity: 1; transform: translateY(-15px) scale(1); }
+}
+
+/* 蓮花花瓣（合十後降下） */
+.worship__petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.worship__petals span {
+  position: absolute; top: -8%; font-size: 1.6rem;
+  animation: petalFall linear forwards;
+  filter: drop-shadow(0 2px 4px rgba(158,27,27,.3));
+}
+@keyframes petalFall {
+  to { transform: translateY(calc(100vh)) rotate(720deg); opacity: 0; }
+}
+
+.worship__deity img {
+  position: relative; max-width: 460px; width: 100%; border-radius: 22px;
+  box-shadow: var(--shadow-lg); z-index: 1;
+  transition: box-shadow .8s, transform .8s;
+}
+.worship__deity.praying img {
+  box-shadow: 0 0 30px rgba(251,192,74,.7), 0 0 60px rgba(251,192,74,.35), var(--shadow-lg);
+  transform: scale(1.02);
+}
 .worship__incense { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); display: flex; gap: 22px; opacity: 0; transition: opacity .8s; pointer-events: none; }
 .worship__incense.lit { opacity: 1; }
 .worship__incense span { display: block; width: 3px; height: 90px; background: linear-gradient(to top, #6a3a14 0%, #a85e1d 30%, #ffb066 70%, #fff4d0 95%); border-radius: 1.5px; position: relative; }
@@ -286,6 +336,63 @@ strong, b { font-family: inherit; font-weight: 700; }
 .worship__count { margin-top: 14px; font-size: .92rem; color: var(--gold-dark); font-weight: 700; text-align: center; }
 
 @media (max-width: 800px) { .worship { grid-template-columns: 1fr; } .worship__deity img { max-width: 360px; } }
+
+/* ---------- 書法風格浮動圈圈（線上參拜 + 抽籤） ---------- */
+.worship-floats { position: fixed; right: 24px; bottom: 86px; z-index: 940; display: flex; flex-direction: column; gap: 14px; align-items: flex-end; }
+.worship-float { display: flex; align-items: center; gap: 0; background: transparent; border: 0; cursor: pointer; padding: 0; font-family: inherit; }
+.worship-float__icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  display: grid; place-items: center;
+  position: relative; flex-shrink: 0;
+  box-shadow: var(--shadow-md);
+  transition: transform .35s ease;
+  animation: floatBob 2.6s infinite ease-in-out;
+}
+.worship-float__char { font-family: var(--serif); font-size: 1.95rem; font-weight: 900; line-height: 1; letter-spacing: -.02em; transform: translateY(1px); }
+.worship-float--pray .worship-float__icon {
+  background: radial-gradient(circle at 30% 30%, #c33b3b 0%, #9e1b1b 55%, #5c0f0f 100%);
+  border: 2px solid #ffd96b;
+}
+.worship-float--pray .worship-float__char { color: #ffd96b; text-shadow: 0 1px 2px rgba(0,0,0,.4), 0 0 12px rgba(255,217,107,.6); }
+.worship-float--oracle .worship-float__icon {
+  background: radial-gradient(circle at 30% 30%, #e3c275 0%, #c8a04c 55%, #8a6620 100%);
+  border: 2px solid #fff7e2;
+  animation-delay: -1.3s;
+}
+.worship-float--oracle .worship-float__char { color: #fff; text-shadow: 0 1px 2px rgba(122,77,18,.6); }
+
+/* 脈動光圈 */
+.worship-float__icon::before, .worship-float__icon::after {
+  content: ""; position: absolute; inset: -3px; border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: pulseRing 2.4s infinite;
+}
+.worship-float--pray .worship-float__icon::before, .worship-float--pray .worship-float__icon::after { color: #ffd96b; }
+.worship-float--oracle .worship-float__icon::before, .worship-float--oracle .worship-float__icon::after { color: #fff; }
+.worship-float__icon::after { animation-delay: 1.2s; }
+
+/* 標籤（hover 才展開） */
+.worship-float__label {
+  background: #fff; color: var(--ink); font-size: .92rem; font-weight: 700;
+  height: 38px; line-height: 38px; align-self: center;
+  border-radius: 999px; padding: 0 4px 0 16px;
+  max-width: 0; overflow: hidden; white-space: nowrap;
+  transform: translateX(14px);
+  transition: max-width .35s ease, padding .35s ease;
+  box-shadow: var(--shadow-sm);
+}
+.worship-float:hover .worship-float__label { max-width: 130px; padding: 0 22px 0 18px; }
+.worship-float:hover .worship-float__icon { transform: scale(1.1) rotate(-8deg); }
+.worship-float:active .worship-float__icon { transform: scale(.94); }
+
+@keyframes floatBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes pulseRing { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.55); } }
+
+@media (max-width: 600px) {
+  .worship-floats { right: 14px; bottom: 78px; gap: 10px; }
+  .worship-float__icon { width: 56px; height: 56px; }
+  .worship-float__char { font-size: 1.7rem; }
+}
 
 /* ---------- Oracle (today's fortune) ---------- */
 .oracle { max-width: 640px; margin: 0 auto; }
