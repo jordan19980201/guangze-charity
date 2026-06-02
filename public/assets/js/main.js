@@ -23,7 +23,7 @@
   const NAV = [
     ["index.html", "首頁"],
     ["about.html", "關於我們"],
-    ["services.html", "我們的善行"],
+    ["services.html", "我們的足跡"],
     ["news.html", "最新消息"],
     ["stories.html", "成果與故事"],
     ["contact.html", "聯絡我們"],
