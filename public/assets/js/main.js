@@ -50,9 +50,6 @@
              <a data-link="facebook" href="#" aria-label="Facebook" target="_blank" rel="noopener">
                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h2.5l.5-3H14V9c0-.6.4-1 1-1z"/></svg>
              </a>
-             <a data-link="lineId" href="#" aria-label="LINE" target="_blank" rel="noopener">
-               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 4 3.6 7.3 8.5 7.9.3.1.8.2.9.5.1.3.1.7 0 1l-.1.9c0 .3-.2 1 .9.6 1.1-.5 6-3.5 8.2-6C21.9 14.3 22 12.7 22 11c0-4.4-4.5-8-10-8z"/></svg>
-             </a>
            </div>
          </div>
          <div>
@@ -392,6 +389,59 @@
           setTimeout(() => { prayBtn.classList.add("done"); prayBtn.textContent = "已合十參拜　謝謝您"; }, 1200);
         });
     });
+  }
+
+  /* ---------- 擲筊問事 ---------- */
+  const tossBtn = $("#toss-btn");
+  if (tossBtn) {
+    const stage = $("#toss-stage");
+    const poes = stage ? Array.from(stage.querySelectorAll(".toss__poe")) : [];
+    const result = $("#toss-result");
+    const tossName = $("#toss-name");
+    const tossText = $("#toss-text");
+    const tossEb = $("#toss-eyebrow");
+    const tossAgain = $("#toss-again");
+    // 機率：聖筊較常見、笑筊次之、陰筊較少（符合「誠心祈福」氛圍）
+    const outcomes = [
+      { type: "yang-yin", name: "聖筊", eyebrow: "🌟 應允 SHENG", cls: "is-yang",
+        text: "廣澤尊王應允您的祈願。誠心存善、行得正，這份善願必有迴響。" },
+      { type: "yang-yang", name: "笑筊", eyebrow: "😊 莞爾 XIAO", cls: "is-laugh",
+        text: "廣澤尊王莞爾一笑。您的祈願或時機尚需斟酌，請再靜心思量、調整方向。" },
+      { type: "yin-yin", name: "陰筊", eyebrow: "🙏 慈悲 YIN", cls: "is-yin",
+        text: "廣澤尊王慈悲指引。請先回頭省思自身，或更虔誠地祈求，再來請示。" },
+    ];
+    function pick() {
+      // 聖筊 0.42、笑筊 0.33、陰筊 0.25
+      const r = Math.random();
+      return r < 0.42 ? outcomes[0] : r < 0.75 ? outcomes[1] : outcomes[2];
+    }
+    function applyFinals(type) {
+      // yang = 正面朝上、yin = 反面朝上
+      const sides = type.split("-"); // ["yang","yin"]
+      poes.forEach((p, i) => p.setAttribute("data-final", sides[i] || "yang"));
+    }
+    function reset() {
+      poes.forEach((p) => p.classList.remove("tossing"));
+      if (result) { result.hidden = true; result.classList.remove("is-yang", "is-laugh", "is-yin"); }
+    }
+    tossBtn.addEventListener("click", () => {
+      if (tossBtn.disabled) return;
+      tossBtn.disabled = true;
+      reset();
+      // 強制 reflow 重啟動畫
+      void stage.offsetWidth;
+      const o = pick();
+      applyFinals(o.type);
+      poes.forEach((p) => p.classList.add("tossing"));
+      setTimeout(() => {
+        if (tossName) tossName.textContent = o.name;
+        if (tossEb) tossEb.textContent = o.eyebrow;
+        if (tossText) tossText.textContent = o.text;
+        if (result) { result.classList.add(o.cls); result.hidden = false; }
+        tossBtn.disabled = false;
+      }, 1700);
+    });
+    if (tossAgain) tossAgain.addEventListener("click", reset);
   }
 
   /* ---------- Oracle (today's fortune) ---------- */
