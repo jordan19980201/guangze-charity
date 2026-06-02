@@ -254,7 +254,7 @@
   const homeNews = $("#home-news");
   if (homeNews) {
     getJSON("content/news.json").then((d) => {
-      const items = (d.items || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
+      const items = (d.items || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 2);
       homeNews.innerHTML = items.length ? items.map(newsCard).join("") : '<p class="empty">最新消息將陸續發布，敬請期待。</p>';
       observeReveals();
     }).catch(() => {});
