@@ -90,57 +90,61 @@
       <div class="toss reveal">
         <svg width="0" height="0" style="position:absolute" aria-hidden="true">
           <defs>
-            <radialGradient id="poeFrontGrad" cx="40%" cy="32%" r="78%">
-              <stop offset="0%" stop-color="#ff9999"/>
-              <stop offset="22%" stop-color="#e84040"/>
-              <stop offset="55%" stop-color="#a51717"/>
-              <stop offset="100%" stop-color="#460606"/>
+            <!-- 凸面：深紅木漆，亮面較柔和（不像塑膠） -->
+            <radialGradient id="poeFrontGrad" cx="35%" cy="30%" r="80%">
+              <stop offset="0%" stop-color="#dc4040"/>
+              <stop offset="30%" stop-color="#b22020"/>
+              <stop offset="65%" stop-color="#7a0e0e"/>
+              <stop offset="100%" stop-color="#3a0404"/>
             </radialGradient>
-            <linearGradient id="poeShine" x1="20%" y1="8%" x2="42%" y2="92%">
-              <stop offset="0%" stop-color="rgba(255,255,255,.6)"/>
-              <stop offset="50%" stop-color="rgba(255,255,255,0)"/>
+            <linearGradient id="poeShine" x1="15%" y1="10%" x2="35%" y2="90%">
+              <stop offset="0%" stop-color="rgba(255,210,210,.55)"/>
+              <stop offset="50%" stop-color="rgba(255,210,210,0)"/>
             </linearGradient>
+            <!-- 平面：較暗、有木紋感 -->
             <linearGradient id="poeBackGrad" x1="50%" y1="0%" x2="50%" y2="100%">
               <stop offset="0%" stop-color="#8a1414"/>
-              <stop offset="50%" stop-color="#7a1010"/>
-              <stop offset="100%" stop-color="#4a0606"/>
+              <stop offset="50%" stop-color="#6e0a0a"/>
+              <stop offset="100%" stop-color="#3a0404"/>
             </linearGradient>
-            <!-- 真實聖筊形狀（俯視）：飽滿半月，比例約 1:1.35 -->
+            <!-- 飽滿 D 形半月（弧朝左、內近直線朝右），俯視比例約 1:1.55 -->
             <symbol id="poeShape" viewBox="0 0 100 140" preserveAspectRatio="none">
-              <path d="M82 14
-                       C 44 8, 10 30, 10 70
-                       C 10 110, 44 132, 82 126
-                       C 76 108, 74 90, 74 70
-                       C 74 50, 76 32, 82 14 Z"/>
+              <path d="M88 12
+                       C 50 6, 14 24, 8 60
+                       C 4 82, 4 92, 8 114
+                       C 16 138, 54 144, 88 134
+                       C 84 114, 82 92, 82 72
+                       C 82 52, 84 32, 88 12 Z"/>
             </symbol>
             <symbol id="poeFront" viewBox="0 0 100 140" preserveAspectRatio="none">
-              <use href="#poeShape" fill="url(#poeFrontGrad)" stroke="#2c0303" stroke-width="1.2"/>
-              <!-- 大面積高光（凸面圓滑感，左側） -->
-              <path d="M34 30
-                       C 22 50, 18 70, 20 95
-                       C 22 112, 28 122, 34 124
-                       C 38 122, 36 116, 32 108
-                       C 26 92, 24 76, 28 56
-                       C 30 42, 36 34, 34 30 Z" fill="url(#poeShine)"/>
-              <!-- 內弧側暗影邊緣（右側） -->
-              <path d="M76 28 C 70 50, 68 70, 68 70 C 68 90, 70 110, 76 124"
-                    fill="none" stroke="rgba(20,0,0,.45)" stroke-width="3" stroke-linecap="round"/>
-              <!-- 頂端反光點 -->
-              <ellipse cx="62" cy="18" rx="7" ry="3" fill="rgba(255,255,255,.55)"/>
-              <!-- 底端反光點 -->
-              <ellipse cx="62" cy="122" rx="7" ry="3" fill="rgba(255,255,255,.3)"/>
+              <use href="#poeShape" fill="url(#poeFrontGrad)" stroke="#220202" stroke-width="1.4"/>
+              <!-- 弧形側大面積柔和高光 -->
+              <path d="M26 30
+                       C 16 50, 12 72, 14 95
+                       C 16 112, 22 124, 28 126
+                       C 32 124, 30 118, 26 110
+                       C 20 94, 18 76, 22 56
+                       C 24 42, 30 32, 26 30 Z" fill="url(#poeShine)"/>
+              <!-- 內側接近平面的微弱暗影帶 -->
+              <path d="M76 28 C 72 52, 70 72, 70 72 C 70 92, 72 110, 76 130"
+                    fill="none" stroke="rgba(0,0,0,.35)" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- 弧形側頂端反光 -->
+              <ellipse cx="22" cy="32" rx="5" ry="2" fill="rgba(255,255,255,.5)"/>
+              <ellipse cx="22" cy="122" rx="5" ry="2" fill="rgba(255,255,255,.28)"/>
             </symbol>
             <symbol id="poeBack" viewBox="0 0 100 140" preserveAspectRatio="none">
-              <use href="#poeShape" fill="url(#poeBackGrad)" stroke="#1f0202" stroke-width="1.2"/>
-              <!-- 木紋（沿半月縱向） -->
-              <path d="M46 22 C 40 50, 38 70, 38 70 C 38 92, 40 116, 46 128"
-                    fill="none" stroke="rgba(30,0,0,.5)" stroke-width=".9"/>
-              <path d="M30 36 C 24 56, 22 70, 22 70 C 22 90, 24 108, 30 120"
-                    fill="none" stroke="rgba(30,0,0,.35)" stroke-width=".7"/>
-              <path d="M60 28 C 56 52, 56 70, 56 70 C 56 88, 56 110, 60 122"
-                    fill="none" stroke="rgba(30,0,0,.3)" stroke-width=".55"/>
+              <use href="#poeShape" fill="url(#poeBackGrad)" stroke="#180101" stroke-width="1.4"/>
+              <!-- 木紋（縱向，多條，比正面明顯） -->
+              <path d="M50 22 C 46 50, 44 72, 44 72 C 44 92, 46 116, 50 132"
+                    fill="none" stroke="rgba(35,5,5,.65)" stroke-width="1"/>
+              <path d="M34 32 C 28 54, 26 72, 26 72 C 26 92, 28 110, 34 124"
+                    fill="none" stroke="rgba(35,5,5,.45)" stroke-width=".8"/>
+              <path d="M64 28 C 60 54, 60 72, 60 72 C 60 90, 60 110, 64 130"
+                    fill="none" stroke="rgba(35,5,5,.5)" stroke-width=".7"/>
+              <path d="M20 44 C 16 60, 14 72, 14 72 C 14 90, 16 100, 20 116"
+                    fill="none" stroke="rgba(35,5,5,.3)" stroke-width=".6"/>
               <!-- 整體陰影感 -->
-              <use href="#poeShape" fill="rgba(0,0,0,.18)"/>
+              <use href="#poeShape" fill="rgba(0,0,0,.22)"/>
             </symbol>
           </defs>
         </svg>
