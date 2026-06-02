@@ -72,9 +72,13 @@
     </div>
   </section>
 
+  <!-- 神廳沉浸區（擲筊 + 籤詩共用背景） -->
+  <div class="temple-wrap">
+  <div class="temple-wrap__bg"></div>
+
   <!-- 擲筊問事 -->
   <section class="section toss-section" id="section-toss">
-    <div class="toss-bg"></div>
+    <div class="toss-bg" hidden></div>
     <div class="container" style="position:relative;z-index:2">
       <div class="section__head">
         <p class="eyebrow">擲筊問事</p>
@@ -101,26 +105,30 @@
               <stop offset="50%" stop-color="#7a1010"/>
               <stop offset="100%" stop-color="#4a0606"/>
             </linearGradient>
-            <symbol id="poeShape" viewBox="0 0 90 180" preserveAspectRatio="none">
-              <path d="M45 4 C24 4 11 30 11 65 C11 112 18 158 35 175 C38 178 52 178 55 175 C72 158 79 112 79 65 C79 30 66 4 45 4 Z"/>
+            <!-- 月牙形：外弧大、內弧凹進、兩端尖（真實聖筊形狀） -->
+            <symbol id="poeShape" viewBox="0 0 80 160" preserveAspectRatio="none">
+              <path d="M52 8
+                       C 26 18, 8 50, 8 80
+                       C 8 110, 26 142, 52 152
+                       C 48 138, 36 110, 36 80
+                       C 36 50, 48 22, 52 8 Z"/>
             </symbol>
-            <symbol id="poeFront" viewBox="0 0 90 180" preserveAspectRatio="none">
+            <symbol id="poeFront" viewBox="0 0 80 160" preserveAspectRatio="none">
               <use href="#poeShape" fill="url(#poeFrontGrad)" stroke="#2c0303" stroke-width=".9"/>
-              <!-- 高光 -->
-              <path d="M34 24 C26 38 23 65 25 95 C26 118 30 140 35 152 C38 154 39 150 37 142 C32 122 28 90 30 60 C32 40 38 28 34 24 Z" fill="url(#poeShine)"/>
-              <!-- 右側暗影邊緣 -->
-              <path d="M59 28 C66 48 71 82 69 118 C68 144 62 162 56 172" fill="none" stroke="rgba(20,0,0,.45)" stroke-width="2.5" stroke-linecap="round"/>
-              <!-- 頂端反光點 -->
-              <ellipse cx="42" cy="14" rx="6" ry="2.5" fill="rgba(255,255,255,.5)"/>
+              <!-- 高光（沿外弧內側） -->
+              <path d="M28 32 C20 48 16 70 18 95 C20 115 26 132 30 138 C32 138 32 132 30 124 C24 105 22 80 24 58 C26 42 30 32 28 32 Z" fill="url(#poeShine)"/>
+              <!-- 內弧的細微反光 -->
+              <path d="M42 26 C40 50 38 80 38 80 C38 105 40 130 42 134" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.8" stroke-linecap="round"/>
+              <!-- 頂端尖端反光點 -->
+              <ellipse cx="48" cy="14" rx="4" ry="2" fill="rgba(255,255,255,.5)"/>
             </symbol>
-            <symbol id="poeBack" viewBox="0 0 90 180" preserveAspectRatio="none">
+            <symbol id="poeBack" viewBox="0 0 80 160" preserveAspectRatio="none">
               <use href="#poeShape" fill="url(#poeBackGrad)" stroke="#1f0202" stroke-width=".9"/>
-              <!-- 木紋 -->
-              <line x1="45" y1="20" x2="45" y2="165" stroke="rgba(30,0,0,.55)" stroke-width=".7"/>
-              <line x1="36" y1="36" x2="36" y2="148" stroke="rgba(30,0,0,.4)" stroke-width=".5"/>
-              <line x1="54" y1="36" x2="54" y2="148" stroke="rgba(30,0,0,.4)" stroke-width=".5"/>
+              <!-- 木紋（沿月牙弧線） -->
+              <path d="M44 24 C40 50 38 80 38 80 C38 110 40 134 42 142" fill="none" stroke="rgba(30,0,0,.55)" stroke-width=".7"/>
+              <path d="M34 40 C28 60 26 80 26 80 C26 100 28 120 32 134" fill="none" stroke="rgba(30,0,0,.4)" stroke-width=".5"/>
               <!-- 整體陰影感 -->
-              <path d="M45 4 C24 4 11 30 11 65 C11 112 18 158 35 175 C38 178 52 178 55 175 C72 158 79 112 79 65 C79 30 66 4 45 4 Z" fill="rgba(0,0,0,.18)"/>
+              <use href="#poeShape" fill="rgba(0,0,0,.16)"/>
             </symbol>
           </defs>
         </svg>
@@ -128,15 +136,15 @@
         <div class="toss__stage" id="toss-stage">
           <div class="toss__poe poe--left" data-side="left">
             <div class="poe__inner">
-              <div class="poe__face poe__face--front"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
-              <div class="poe__face poe__face--back"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
+              <div class="poe__face poe__face--front"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
+              <div class="poe__face poe__face--back"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
             </div>
             <div class="poe__shadow"></div>
           </div>
           <div class="toss__poe poe--right" data-side="right">
             <div class="poe__inner">
-              <div class="poe__face poe__face--front"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
-              <div class="poe__face poe__face--back"><svg viewBox="0 0 90 180" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
+              <div class="poe__face poe__face--front"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
+              <div class="poe__face poe__face--back"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
             </div>
             <div class="poe__shadow"></div>
           </div>
@@ -157,7 +165,7 @@
 
   <!-- 今日籤詩（與擲筊共用神廳背景） -->
   <section class="section toss-section" id="section-oracle">
-    <div class="toss-bg"></div>
+    <div class="toss-bg" hidden></div>
     <div class="container" style="position:relative;z-index:2">
       <div class="section__head">
         <p class="eyebrow">今日籤詩</p>
@@ -194,6 +202,8 @@
       </div>
     </div>
   </section>
+  </div>
+  <!-- /神廳沉浸區 -->
 
   <section class="section cta">
     <div class="container">
@@ -202,6 +212,17 @@
       <a class="btn btn--primary" href="get-involved.html">我要響應愛心</a>
     </div>
   </section>
+
+  <!-- 合十參拜全螢幕祝禱動畫 -->
+  <div class="pray-overlay" id="pray-overlay" hidden aria-hidden="true">
+    <div class="pray-overlay__halo"></div>
+    <div class="pray-overlay__ring"></div>
+    <div class="pray-overlay__ring pray-overlay__ring--delay"></div>
+    <div class="pray-overlay__hand">🙏</div>
+    <div class="pray-overlay__petals" id="pray-overlay-petals"></div>
+    <p class="pray-overlay__title">廣澤尊王垂佑</p>
+    <p class="pray-overlay__subtitle" id="pray-overlay-sub">善願已記　平安隨身</p>
+  </div>
 
   <footer id="site-footer"></footer>
   <button class="to-top" aria-label="回到頂端">↑</button>
