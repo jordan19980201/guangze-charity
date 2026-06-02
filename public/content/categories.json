@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "id": "rice",
+      "icon": "🍚",
+      "title": "百斤米一世情",
+      "subtitle": "年度旗艦活動・自民國 99 年起每年舉辦",
+      "desc": "於廣澤尊王聖誕（農曆八月廿二）舉行，發放白米、麵條、罐頭等民生物資，並結合義剪、視力檢查、血糖篩檢、X 光肺部檢查與愛心餐點，全方位關懷弱勢家庭。",
+      "newsIds": ["2025-rice-16","2024-rice-15","2023-rice-14","2022-rice-13","2021-rice-12","2020-rice-11","2019-rice-10","2018-rice-9","2017-rice-8"]
+    },
+    {
+      "id": "love-out-loud",
+      "icon": "💬",
+      "title": "愛要大聲說　文具自己買",
+      "subtitle": "年度教育活動・自民國 112 年（2023）創設",
+      "desc": "鼓勵 3C 世代的孩子勇敢向父母、長輩與師長表達愛與感謝，依「我愛您」音量頒贈文具禮券，並結合警方反詐、反毒、交通安全宣導。",
+      "newsIds": ["2026-love-out-loud","2025-love-out-loud-3","2024-love-out-loud-2","2023-love-out-loud-first"]
+    },
+    {
+      "id": "school-led",
+      "icon": "💡",
+      "title": "校園 LED 燈／校舍改善",
+      "subtitle": "長期計畫・自 2016 年起持續",
+      "desc": "走入新竹、桃園、苗栗等地校園，為老舊昏暗的教室、圖書館、走廊與夜讀教室汰換 LED 節能燈具、改善照明環境，已協助逾 17 所學校。",
+      "newsIds": ["2020-led-thanks","2017-led-series","2016-guangfu-led"]
+    },
+    {
+      "id": "remote",
+      "icon": "🌄",
+      "title": "偏鄉送暖／跨縣市捐米",
+      "subtitle": "走出新竹・把白米送到山的那一頭",
+      "desc": "足跡延伸至新竹尖石、南投仁愛鄉合作村、南投大埔里、桃園復興區霞雲社區與石碎社區等地，把愛心物資送進部落與山區。",
+      "newsIds": ["2023-puli-1500","2019-shisai-light","2018-renai-coop","2018-jianshi-10000","2017-rice-3000-puli"]
+    },
+    {
+      "id": "emergency",
+      "icon": "🚨",
+      "title": "疫情關懷／急難救助",
+      "subtitle": "緊急時刻・隨時在身邊的依靠",
+      "desc": "面對新冠疫情、強降雨災害或家庭突遭變故時，協會即時介入訪視關懷，把愛心物資與慰問金親手送到最需要的家門口。",
+      "newsIds": ["2024-emergency-aid","2021-chiafu-donation","2021-covex-relief","2019-flood-relief"]
+    },
+    {
+      "id": "education",
+      "icon": "📚",
+      "title": "捐資興學／企業聯合捐贈",
+      "subtitle": "教育是翻轉人生最重要的力量",
+      "desc": "捐助學校助學金、與在地企業聯合捐贈書籍與資源，讓清寒學子不因經濟困難而失去學習機會。",
+      "newsIds": ["2025-fkjh-scholarship","2017-library-donation"]
+    },
+    {
+      "id": "culture",
+      "icon": "🎭",
+      "title": "文化藝術活動",
+      "subtitle": "以信仰連結藝術，讓愛被看見",
+      "desc": "透過影像創作比賽、傳統歌仔戲等大型文化活動，邀請鄉親共同參與，讓慈善以新世代的方式被看見、被傳遞。",
+      "newsIds": ["2026-opera-fuchen","2017-film-contest"]
+    },
+    {
+      "id": "community",
+      "icon": "👨‍👩‍👧",
+      "title": "社區親子活動／愛心義剪",
+      "subtitle": "與在地社區、店家攜手，把關懷送進生活",
+      "desc": "結合曼都集團義剪、香山區社福中心社區據點活動等，提供義診、義剪、視障按摩與懷舊童玩，讓大人小孩都被照顧到。",
+      "newsIds": ["2024-community-chuanchuan","2017-haircut-fuguang"]
+    }
+  ]
+}

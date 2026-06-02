@@ -252,6 +252,35 @@ h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.35;
 .to-top.show { opacity: 1; pointer-events: auto; }
 .to-top:hover { background: var(--red-dark); transform: translateY(-3px); }
 
+/* ---------- Service categories (services page) ---------- */
+.cat { background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 14px; padding: 28px 30px; margin-bottom: 26px; box-shadow: var(--shadow-sm); }
+.cat__head { display: flex; align-items: flex-start; gap: 18px; margin-bottom: 14px; }
+.cat__icon { width: 60px; height: 60px; border-radius: 50%; background: rgba(158,27,27,.08); display: grid; place-items: center; font-size: 1.9rem; flex-shrink: 0; }
+.cat__heading { flex: 1; min-width: 0; }
+.cat__heading h3 { font-family: var(--serif); font-size: 1.4rem; color: var(--ink); margin-bottom: 4px; line-height: 1.35; }
+.cat__sub { font-size: .9rem; color: var(--gold-dark); font-weight: 700; letter-spacing: .03em; }
+.cat__count { flex-shrink: 0; font-size: .82rem; font-weight: 700; color: #fff; background: var(--red); border-radius: 999px; padding: 5px 14px; align-self: flex-start; }
+.cat__desc { color: var(--ink-soft); font-size: .98rem; margin-bottom: 18px; padding-left: 78px; }
+.cat__items { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.cat__item { display: flex; align-items: center; gap: 14px; padding: 14px 6px; border-bottom: 1px dashed var(--line); color: var(--ink); transition: background .2s, padding .2s; }
+.cat__item:last-child { border-bottom: 0; }
+.cat__item:hover { background: rgba(200,160,76,.08); padding-left: 14px; }
+.cat__date { flex-shrink: 0; font-size: .82rem; font-weight: 700; color: var(--gold-dark); width: 110px; }
+.cat__title { flex: 1; font-size: .98rem; font-weight: 500; }
+.cat__item:hover .cat__title { color: var(--red); }
+.cat__arrow { flex-shrink: 0; color: var(--red); font-weight: 700; opacity: 0; transition: opacity .2s, transform .2s; }
+.cat__item:hover .cat__arrow { opacity: 1; transform: translateX(4px); }
+@media (max-width: 600px) {
+  .cat { padding: 22px 18px; }
+  .cat__icon { width: 50px; height: 50px; font-size: 1.5rem; }
+  .cat__head { gap: 14px; }
+  .cat__heading h3 { font-size: 1.15rem; }
+  .cat__desc { padding-left: 0; font-size: .92rem; }
+  .cat__date { width: 88px; font-size: .76rem; }
+  .cat__title { font-size: .9rem; }
+  .cat__item { padding: 12px 4px; }
+}
+
 /* ---------- Upcoming events section ---------- */
 .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 24px; }
 .event-card { display: flex; gap: 18px; background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow-sm); transition: transform .25s, box-shadow .25s; text-align: left; }

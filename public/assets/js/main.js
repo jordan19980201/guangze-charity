@@ -260,6 +260,44 @@
     }).catch(() => { if (newsList) newsList.innerHTML = '<p class="empty">內容載入失敗，請稍後再試。</p>'; });
   }
 
+  /* ---------- Categories page (services) ---------- */
+  const catList = $("#categories-list");
+  if (catList) {
+    Promise.all([
+      getJSON("content/categories.json").catch(() => ({ items: [] })),
+      getJSON("content/news.json").catch(() => ({ items: [] })),
+    ]).then(([cats, news]) => {
+      const byId = {};
+      (news.items || []).forEach((n) => (byId[n.id] = n));
+      const html = (cats.items || []).map((c) => {
+        const items = (c.newsIds || []).map((id) => byId[id]).filter(Boolean)
+          .sort((a, b) => new Date(b.date) - new Date(a.date));
+        const itemsHTML = items.length
+          ? items.map((n) =>
+              `<a class="cat__item" href="news.html?id=${encodeURIComponent(n.id)}">
+                 <span class="cat__date">${esc(fmtDate(n.date))}</span>
+                 <span class="cat__title">${esc(n.title)}</span>
+                 <span class="cat__arrow">→</span>
+               </a>`).join("")
+          : '<p class="empty-note" style="opacity:.65">尚無紀錄</p>';
+        return `<section class="cat reveal">
+            <header class="cat__head">
+              <div class="cat__icon">${c.icon || "✦"}</div>
+              <div class="cat__heading">
+                <h3>${esc(c.title)}</h3>
+                <p class="cat__sub">${esc(c.subtitle || "")}</p>
+              </div>
+              <div class="cat__count">${items.length} 則</div>
+            </header>
+            ${c.desc ? `<p class="cat__desc">${esc(c.desc)}</p>` : ""}
+            <div class="cat__items">${itemsHTML}</div>
+          </section>`;
+      }).join("");
+      catList.innerHTML = html;
+      observeReveals();
+    });
+  }
+
   /* ---------- Stories page ---------- */
   const storyList = $("#stories-list");
   if (storyList) {
