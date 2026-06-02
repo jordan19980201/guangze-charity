@@ -167,7 +167,9 @@ strong, b { font-family: inherit; font-weight: 700; }
 .feature--reverse .feature__media { order: 2; }
 
 /* ---------- Service cards ---------- */
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 900px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .cards { grid-template-columns: 1fr; } }
 .card {
   background: #fff; border-radius: var(--radius); padding: 34px 28px;
   box-shadow: var(--shadow-sm); border: 1px solid var(--line);
