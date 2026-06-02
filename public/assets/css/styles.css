@@ -459,12 +459,12 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 
 .toss { position: relative; max-width: 620px; margin: 0 auto; text-align: center; }
 .toss__stage {
-  position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 12px;
-  height: 260px; margin: 30px auto 24px; perspective: 1200px;
+  position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 16px;
+  height: 320px; margin: 30px auto 24px; perspective: 1200px;
 }
 
-/* 紅筊（飽滿半月形） */
-.toss__poe { width: 100px; height: 140px; position: relative; transform-style: preserve-3d; transition: transform .2s; }
+/* 紅筊（飽滿半月形，加大） */
+.toss__poe { width: 140px; height: 240px; position: relative; transform-style: preserve-3d; transition: transform .2s; }
 .poe__inner { position: absolute; inset: 0; transform-style: preserve-3d; }
 .poe__face {
   position: absolute; inset: 0;
@@ -476,10 +476,10 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 /* 右邊聖筊水平鏡像（兩個合在一起像滿月） */
 .poe--right .poe__face img { transform: scaleX(-1); }
 .poe__shadow {
-  position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
-  width: 96px; height: 18px; border-radius: 50%;
+  position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%);
+  width: 130px; height: 22px; border-radius: 50%;
   background: radial-gradient(ellipse, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 70%);
-  filter: blur(3px);
+  filter: blur(4px);
 }
 
 /* 初始：兩筊靠攏直立（雙手合握的姿態） */
@@ -488,15 +488,15 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 
 /* 擲筊動畫：飛起、翻轉、落下（更流暢） */
 .toss__poe.tossing { animation: poeToss 1.9s cubic-bezier(.32, .04, .29, 1) forwards; }
-.poe--left.tossing  { --tx: -60px; --rotz: -420deg; }
-.poe--right.tossing { --tx:  60px; --rotz:  420deg; animation-delay: .05s; }
+.poe--left.tossing  { --tx: -80px; --rotz: -420deg; }
+.poe--right.tossing { --tx:  80px; --rotz:  420deg; animation-delay: .05s; }
 @keyframes poeToss {
   0%   { transform: translate(0, 0) rotateZ(0); }
-  18%  { transform: translate(calc(var(--tx) * .25), -130px) rotateZ(calc(var(--rotz) * .25)); }
-  38%  { transform: translate(calc(var(--tx) * .55), -220px) rotateZ(calc(var(--rotz) * .55)); }
-  60%  { transform: translate(calc(var(--tx) * .82), -170px) rotateZ(calc(var(--rotz) * .82)); }
-  82%  { transform: translate(calc(var(--tx) * .96), -40px) rotateZ(calc(var(--rotz) * .96)); }
-  92%  { transform: translate(var(--tx), 8px) rotateZ(var(--rotz)); }
+  18%  { transform: translate(calc(var(--tx) * .25), -170px) rotateZ(calc(var(--rotz) * .25)); }
+  38%  { transform: translate(calc(var(--tx) * .55), -280px) rotateZ(calc(var(--rotz) * .55)); }
+  60%  { transform: translate(calc(var(--tx) * .82), -210px) rotateZ(calc(var(--rotz) * .82)); }
+  82%  { transform: translate(calc(var(--tx) * .96), -50px) rotateZ(calc(var(--rotz) * .96)); }
+  92%  { transform: translate(var(--tx), 10px) rotateZ(var(--rotz)); }
   100% { transform: translate(var(--tx), 0) rotateZ(var(--rotz)); }
 }
 /* 翻轉 - 結束時的正反面 */
