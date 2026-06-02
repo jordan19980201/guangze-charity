@@ -72,6 +72,48 @@
     </div>
   </section>
 
+  <!-- 擲筊問事 -->
+  <section class="section toss-section" id="section-toss">
+    <div class="toss-bg"></div>
+    <div class="container" style="position:relative;z-index:2">
+      <div class="section__head">
+        <p class="eyebrow">擲筊問事</p>
+        <h2>誠心請示廣澤尊王</h2>
+        <div class="divider"><span></span></div>
+        <p>心中默念您的祈願，點下「擲筊」請尊王指引。</p>
+      </div>
+
+      <div class="toss reveal">
+        <div class="toss__stage" id="toss-stage">
+          <div class="toss__poe poe--left" data-side="left">
+            <div class="poe__inner">
+              <div class="poe__face poe__face--front"></div>
+              <div class="poe__face poe__face--back"></div>
+            </div>
+            <div class="poe__shadow"></div>
+          </div>
+          <div class="toss__poe poe--right" data-side="right">
+            <div class="poe__inner">
+              <div class="poe__face poe__face--front"></div>
+              <div class="poe__face poe__face--back"></div>
+            </div>
+            <div class="poe__shadow"></div>
+          </div>
+        </div>
+
+        <button class="btn toss__btn" id="toss-btn"><span class="toss__btn__char">擲</span><span class="toss__btn__char">筊</span></button>
+
+        <div class="toss__result" id="toss-result" hidden>
+          <div class="toss__result__halo"></div>
+          <span class="toss__result__eyebrow" id="toss-eyebrow"></span>
+          <h3 id="toss-name"></h3>
+          <p id="toss-text"></p>
+          <button class="btn btn--outline btn--sm" id="toss-again">再擲一筊</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 今日籤詩 -->
   <section class="section section--cream2" id="section-oracle">
     <div class="container">
