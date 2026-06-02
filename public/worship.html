@@ -105,30 +105,42 @@
               <stop offset="50%" stop-color="#7a1010"/>
               <stop offset="100%" stop-color="#4a0606"/>
             </linearGradient>
-            <!-- 月牙形：外弧大、內弧凹進、兩端尖（真實聖筊形狀） -->
-            <symbol id="poeShape" viewBox="0 0 80 160" preserveAspectRatio="none">
-              <path d="M52 8
-                       C 26 18, 8 50, 8 80
-                       C 8 110, 26 142, 52 152
-                       C 48 138, 36 110, 36 80
-                       C 36 50, 48 22, 52 8 Z"/>
+            <!-- 真實聖筊形狀（俯視）：飽滿半月，比例約 1:1.35 -->
+            <symbol id="poeShape" viewBox="0 0 100 140" preserveAspectRatio="none">
+              <path d="M82 14
+                       C 44 8, 10 30, 10 70
+                       C 10 110, 44 132, 82 126
+                       C 76 108, 74 90, 74 70
+                       C 74 50, 76 32, 82 14 Z"/>
             </symbol>
-            <symbol id="poeFront" viewBox="0 0 80 160" preserveAspectRatio="none">
-              <use href="#poeShape" fill="url(#poeFrontGrad)" stroke="#2c0303" stroke-width=".9"/>
-              <!-- 高光（沿外弧內側） -->
-              <path d="M28 32 C20 48 16 70 18 95 C20 115 26 132 30 138 C32 138 32 132 30 124 C24 105 22 80 24 58 C26 42 30 32 28 32 Z" fill="url(#poeShine)"/>
-              <!-- 內弧的細微反光 -->
-              <path d="M42 26 C40 50 38 80 38 80 C38 105 40 130 42 134" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.8" stroke-linecap="round"/>
-              <!-- 頂端尖端反光點 -->
-              <ellipse cx="48" cy="14" rx="4" ry="2" fill="rgba(255,255,255,.5)"/>
+            <symbol id="poeFront" viewBox="0 0 100 140" preserveAspectRatio="none">
+              <use href="#poeShape" fill="url(#poeFrontGrad)" stroke="#2c0303" stroke-width="1.2"/>
+              <!-- 大面積高光（凸面圓滑感，左側） -->
+              <path d="M34 30
+                       C 22 50, 18 70, 20 95
+                       C 22 112, 28 122, 34 124
+                       C 38 122, 36 116, 32 108
+                       C 26 92, 24 76, 28 56
+                       C 30 42, 36 34, 34 30 Z" fill="url(#poeShine)"/>
+              <!-- 內弧側暗影邊緣（右側） -->
+              <path d="M76 28 C 70 50, 68 70, 68 70 C 68 90, 70 110, 76 124"
+                    fill="none" stroke="rgba(20,0,0,.45)" stroke-width="3" stroke-linecap="round"/>
+              <!-- 頂端反光點 -->
+              <ellipse cx="62" cy="18" rx="7" ry="3" fill="rgba(255,255,255,.55)"/>
+              <!-- 底端反光點 -->
+              <ellipse cx="62" cy="122" rx="7" ry="3" fill="rgba(255,255,255,.3)"/>
             </symbol>
-            <symbol id="poeBack" viewBox="0 0 80 160" preserveAspectRatio="none">
-              <use href="#poeShape" fill="url(#poeBackGrad)" stroke="#1f0202" stroke-width=".9"/>
-              <!-- 木紋（沿月牙弧線） -->
-              <path d="M44 24 C40 50 38 80 38 80 C38 110 40 134 42 142" fill="none" stroke="rgba(30,0,0,.55)" stroke-width=".7"/>
-              <path d="M34 40 C28 60 26 80 26 80 C26 100 28 120 32 134" fill="none" stroke="rgba(30,0,0,.4)" stroke-width=".5"/>
+            <symbol id="poeBack" viewBox="0 0 100 140" preserveAspectRatio="none">
+              <use href="#poeShape" fill="url(#poeBackGrad)" stroke="#1f0202" stroke-width="1.2"/>
+              <!-- 木紋（沿半月縱向） -->
+              <path d="M46 22 C 40 50, 38 70, 38 70 C 38 92, 40 116, 46 128"
+                    fill="none" stroke="rgba(30,0,0,.5)" stroke-width=".9"/>
+              <path d="M30 36 C 24 56, 22 70, 22 70 C 22 90, 24 108, 30 120"
+                    fill="none" stroke="rgba(30,0,0,.35)" stroke-width=".7"/>
+              <path d="M60 28 C 56 52, 56 70, 56 70 C 56 88, 56 110, 60 122"
+                    fill="none" stroke="rgba(30,0,0,.3)" stroke-width=".55"/>
               <!-- 整體陰影感 -->
-              <use href="#poeShape" fill="rgba(0,0,0,.16)"/>
+              <use href="#poeShape" fill="rgba(0,0,0,.18)"/>
             </symbol>
           </defs>
         </svg>
@@ -136,15 +148,15 @@
         <div class="toss__stage" id="toss-stage">
           <div class="toss__poe poe--left" data-side="left">
             <div class="poe__inner">
-              <div class="poe__face poe__face--front"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
-              <div class="poe__face poe__face--back"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
+              <div class="poe__face poe__face--front"><svg viewBox="0 0 100 140" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
+              <div class="poe__face poe__face--back"><svg viewBox="0 0 100 140" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
             </div>
             <div class="poe__shadow"></div>
           </div>
           <div class="toss__poe poe--right" data-side="right">
             <div class="poe__inner">
-              <div class="poe__face poe__face--front"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
-              <div class="poe__face poe__face--back"><svg viewBox="0 0 80 160" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
+              <div class="poe__face poe__face--front"><svg viewBox="0 0 100 140" preserveAspectRatio="none"><use href="#poeFront"/></svg></div>
+              <div class="poe__face poe__face--back"><svg viewBox="0 0 100 140" preserveAspectRatio="none"><use href="#poeBack"/></svg></div>
             </div>
             <div class="poe__shadow"></div>
           </div>

@@ -212,9 +212,9 @@ strong, b { font-family: inherit; font-weight: 700; }
 .cta .btn--primary:hover { background: var(--red-deep); }
 
 /* ---------- Page hero (inner pages) ---------- */
-.page-hero { padding: calc(var(--nav-h) + 70px) 0 70px; background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%); color: #fff; text-align: center; }
-.page-hero h1 { color: #fff; font-size: clamp(2rem, 5vw, 3.2rem); }
-.page-hero p { margin-top: 14px; opacity: .9; max-width: 680px; margin-inline: auto; }
+.page-hero { padding: calc(var(--nav-h) + 32px) 0 42px; background: linear-gradient(135deg, var(--red) 0%, var(--red-deep) 100%); color: #fff; text-align: center; }
+.page-hero h1 { color: #fff; font-size: clamp(1.95rem, 4.6vw, 2.8rem); }
+.page-hero p { margin-top: 12px; opacity: .9; max-width: 680px; margin-inline: auto; font-size: 1rem; }
 .page-hero .eyebrow { color: var(--gold); }
 
 /* ---------- Rich content ---------- */
@@ -463,8 +463,8 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
   height: 260px; margin: 30px auto 24px; perspective: 1200px;
 }
 
-/* 紅筊（月牙形立體） */
-.toss__poe { width: 80px; height: 160px; position: relative; transform-style: preserve-3d; transition: transform .2s; }
+/* 紅筊（飽滿半月形） */
+.toss__poe { width: 100px; height: 140px; position: relative; transform-style: preserve-3d; transition: transform .2s; }
 .poe__inner { position: absolute; inset: 0; transform-style: preserve-3d; }
 .poe__face {
   position: absolute; inset: 0;
@@ -477,7 +477,7 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .poe--right .poe__face svg { transform: scaleX(-1); }
 .poe__shadow {
   position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
-  width: 78px; height: 16px; border-radius: 50%;
+  width: 96px; height: 18px; border-radius: 50%;
   background: radial-gradient(ellipse, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 70%);
   filter: blur(3px);
 }
