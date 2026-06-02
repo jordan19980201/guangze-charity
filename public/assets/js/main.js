@@ -318,6 +318,26 @@
     }).catch(() => {});
   }
 
+  /* ---------- Monthly visitor counter (heart) ---------- */
+  (function () {
+    const wrap = $("#hero-visitor"), txt = $("#hero-visitor-text");
+    if (!wrap || !txt) return;
+    const now = new Date();
+    const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    const counterName = `guangze-${monthKey}`;
+    const lastVisit = (() => { try { return localStorage.getItem(`gz_visit_${monthKey}`); } catch (e) { return null; } })();
+    // 一個月內同一瀏覽器只計一次
+    const shouldIncrement = !lastVisit;
+    const url = `https://api.counterapi.dev/v1/guangze-charity/${counterName}/${shouldIncrement ? "up" : "?"}`;
+    fetch(url).then((r) => r.json()).then((data) => {
+      const n = (data && (data.count || data.Count)) || 0;
+      if (n <= 0) return;
+      txt.textContent = `${now.getMonth() + 1} 月已有 ${n.toLocaleString()} 位愛心人士關注`;
+      wrap.hidden = false;
+      if (shouldIncrement) { try { localStorage.setItem(`gz_visit_${monthKey}`, String(Date.now())); } catch (e) {} }
+    }).catch(() => {});
+  })();
+
   /* ---------- Upcoming events: section + floating badge ---------- */
   const monthDay = (d) => { const dt = new Date(d); return isNaN(dt) ? { m: "", d: "" } : { m: (dt.getMonth() + 1) + " 月", d: dt.getDate() }; };
   const eventCard = (e) => {
