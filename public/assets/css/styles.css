@@ -309,13 +309,55 @@ strong, b { font-family: inherit; font-weight: 700; }
 
 .worship__deity img {
   position: relative; max-width: 460px; width: 100%; border-radius: 22px;
-  box-shadow: var(--shadow-lg); z-index: 1;
-  transition: box-shadow .8s, transform .8s;
+  box-shadow: var(--shadow-lg); z-index: 1; cursor: pointer;
+  animation: deityFloat 6s infinite ease-in-out;
+  transition: box-shadow .5s, transform .4s, filter .4s;
 }
+.worship__deity img:hover {
+  transform: scale(1.025);
+  filter: brightness(1.08) saturate(1.1);
+  box-shadow: 0 0 30px rgba(251,192,74,.55), 0 0 60px rgba(251,192,74,.25), var(--shadow-lg);
+}
+.worship__deity img:active { transform: scale(.98); }
 .worship__deity.praying img {
-  box-shadow: 0 0 30px rgba(251,192,74,.7), 0 0 60px rgba(251,192,74,.35), var(--shadow-lg);
-  transform: scale(1.02);
+  box-shadow: 0 0 36px rgba(251,192,74,.85), 0 0 72px rgba(251,192,74,.45), var(--shadow-lg);
+  transform: scale(1.04);
+  animation-play-state: paused;
 }
+@keyframes deityFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* 點擊神尊：光環漣漪 */
+.worship__ripple {
+  position: absolute; border: 3px solid var(--gold);
+  border-radius: 22px; pointer-events: none; opacity: 0; z-index: 2;
+  animation: rippleOut 1.2s ease-out forwards;
+}
+@keyframes rippleOut { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.5); } }
+
+/* 點擊神尊：書法字飛升 */
+.worship__charfly {
+  position: absolute; font-family: var(--serif); font-size: 2.2rem; font-weight: 900;
+  color: #ffd96b; text-shadow: 0 0 8px rgba(251,192,74,.8), 0 1px 4px rgba(0,0,0,.4);
+  pointer-events: none; z-index: 3; opacity: 0;
+  animation: charFly 1.6s ease-out forwards;
+}
+@keyframes charFly {
+  0% { opacity: 0; transform: translate(-50%, 0) scale(.6); }
+  20% { opacity: 1; transform: translate(-50%, -20px) scale(1.1); }
+  100% { opacity: 0; transform: translate(-50%, -120px) scale(1.3); }
+}
+
+/* 表單欄位 focus 動畫 */
+.worship__form input:focus, .worship__form select:focus, .worship__form textarea:focus {
+  box-shadow: 0 0 0 3px rgba(200,160,76,.15);
+  border-color: var(--gold);
+}
+
+/* 合十按鈕 hover：emoji 跳動 */
+.worship__btn { transition: transform .25s ease, box-shadow .3s ease; }
+.worship__btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(158,27,27,.35); }
+.worship__btn:hover:not(:disabled)::first-letter { display: inline-block; animation: prayHand .7s infinite; }
+@keyframes prayHand { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px) scale(1.1); } }
 .worship__incense { position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); display: flex; gap: 22px; opacity: 0; transition: opacity .8s; pointer-events: none; }
 .worship__incense.lit { opacity: 1; }
 .worship__incense span { display: block; width: 3px; height: 90px; background: linear-gradient(to top, #6a3a14 0%, #a85e1d 30%, #ffb066 70%, #fff4d0 95%); border-radius: 1.5px; position: relative; }
@@ -337,10 +379,11 @@ strong, b { font-family: inherit; font-weight: 700; }
 
 @media (max-width: 800px) { .worship { grid-template-columns: 1fr; } .worship__deity img { max-width: 360px; } }
 
-/* ---------- 書法風格浮動圈圈（線上參拜 + 抽籤） ---------- */
-/* 線上參拜頁隱藏「近期活動」圈圈，讓拜+籤獨享左下角 */
-.is-worship .upcoming { display: none !important; }
-.worship-floats { position: fixed; left: 24px; bottom: 24px; z-index: 940; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+/* ---------- 書法風格浮動圈圈（全站皆顯示，左下角） ---------- */
+/* 位置：左下角，堆疊在「近期活動」圈圈上方（避免重疊） */
+.worship-floats { position: fixed; left: 24px; bottom: 100px; z-index: 940; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+/* 若無近期活動圈圈，可貼底；用 :has 動態調整 */
+body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 .worship-float { display: flex; align-items: center; gap: 0; background: transparent; border: 0; cursor: pointer; padding: 0; font-family: inherit; }
 .worship-float__icon {
   width: 64px; height: 64px; border-radius: 50%;
@@ -391,7 +434,8 @@ strong, b { font-family: inherit; font-weight: 700; }
 @keyframes pulseRing { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.55); } }
 
 @media (max-width: 600px) {
-  .worship-floats { left: 14px; bottom: 18px; gap: 10px; }
+  .worship-floats { left: 14px; bottom: 90px; gap: 10px; }
+  body:not(:has(.upcoming)) .worship-floats { bottom: 18px; }
   .worship-float__icon { width: 56px; height: 56px; }
   .worship-float__char { font-size: 1.7rem; }
 }

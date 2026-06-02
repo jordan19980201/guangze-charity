@@ -77,6 +77,35 @@
   if (headerEl) { headerEl.className = "header"; headerEl.innerHTML = headerHTML; }
   if (footerEl) { footerEl.className = "footer"; footerEl.innerHTML = footerHTML; }
 
+  /* ---------- 全站浮動圈圈：拜 + 籤（每一頁都有） ---------- */
+  const floats = document.createElement("div");
+  floats.className = "worship-floats";
+  floats.setAttribute("aria-hidden", "true");
+  floats.innerHTML =
+    `<button class="worship-float worship-float--pray" id="float-pray" type="button" aria-label="合十參拜">
+       <span class="worship-float__icon"><span class="worship-float__char">拜</span></span>
+       <span class="worship-float__label">合十參拜</span>
+     </button>
+     <button class="worship-float worship-float--oracle" id="float-oracle" type="button" aria-label="抽今日籤">
+       <span class="worship-float__icon"><span class="worship-float__char">籤</span></span>
+       <span class="worship-float__label">抽今日籤</span>
+     </button>`;
+  document.body.appendChild(floats);
+  const isWorshipPage = (location.pathname.split("/").pop() || "").toLowerCase() === "worship.html";
+  const smoothScrollTo = (sel, focusSel) => {
+    const t = document.querySelector(sel); if (!t) return;
+    t.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (focusSel) setTimeout(() => { const i = document.querySelector(focusSel); if (i) i.focus(); }, 800);
+  };
+  $("#float-pray").addEventListener("click", () => {
+    if (isWorshipPage) smoothScrollTo("#section-pray", "#pray-name");
+    else location.href = "worship.html#section-pray";
+  });
+  $("#float-oracle").addEventListener("click", () => {
+    if (isWorshipPage) smoothScrollTo("#section-oracle");
+    else location.href = "worship.html#section-oracle";
+  });
+
   /* ---------- Header behaviour ---------- */
   const header = $(".header");
   const hasHero = document.body.classList.contains("has-hero");
@@ -262,16 +291,6 @@
   }
 
   /* ---------- Worship page ---------- */
-  // 書法浮動圈圈：點擊滾動到對應區塊
-  const floatPray = $("#float-pray"), floatOracle = $("#float-oracle");
-  if (floatPray) floatPray.addEventListener("click", () => {
-    const t = $(".worship"); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
-    setTimeout(() => { const i = $("#pray-name"); if (i) i.focus(); }, 800);
-  });
-  if (floatOracle) floatOracle.addEventListener("click", () => {
-    const t = $(".oracle"); if (t) t.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-
   // 蓮花花瓣動畫
   function dropPetals() {
     const wrap = $("#petals"); if (!wrap) return;
