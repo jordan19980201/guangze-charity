@@ -171,6 +171,8 @@ button { font-family: inherit; cursor: pointer; }
   background: var(--red); color: #fff; border-color: var(--red);
   box-shadow: var(--shadow-sm);
 }
+.tab__ico { display: inline-flex; align-items: center; }
+.tab__ico svg { width: 16px; height: 16px; display: block; }
 
 /* ---------- Content ---------- */
 .content { max-width: 940px; margin: 0 auto; padding: 40px 28px 24px; }
@@ -189,6 +191,13 @@ button { font-family: inherit; cursor: pointer; }
   font-weight: 700; letter-spacing: .22em; font-size: .78rem;
   margin-bottom: 12px;
 }
+.section-head__ico {
+  display: inline-grid; place-items: center;
+  width: 56px; height: 56px; border-radius: 16px;
+  background: rgba(158,27,27,.08); color: var(--red);
+  margin: 0 auto 18px;
+}
+.section-head__ico svg { width: 30px; height: 30px; }
 .section-head h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2rem); letter-spacing: .03em; }
 .section-head p { color: var(--ink-soft); font-size: .98rem; margin-top: 10px; }
 /* gold divider 跟前台一致 */
@@ -306,6 +315,10 @@ button { font-family: inherit; cursor: pointer; }
 .savebar__hint { font-size: .9rem; color: var(--ink-soft); font-weight: 500; }
 .savebar__hint.ok { color: #1e8449; }
 .savebar__hint.err { color: #b23; }
+.savebar__credit {
+  margin-right: auto; font-size: .8rem; color: #b6ada2;
+  font-family: var(--serif); letter-spacing: .08em;
+}
 
 /* ---------- Loading ---------- */
 .loading {

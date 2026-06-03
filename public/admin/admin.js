@@ -6,6 +6,16 @@
   const show = (el) => el && el.classList.remove("hidden");
   const hide = (el) => el && el.classList.add("hidden");
 
+  // 各區塊 icon（沿用前台的線條 SVG 風格）
+  const ICONS = {
+    carousel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 14l5-5 4 4 3-3 6 6"/><circle cx="9" cy="9" r="1.5"/></svg>',
+    events:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.5"/></svg>',
+    impact:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+    news:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13v16H7a3 3 0 01-3-3z"/><path d="M17 8h3v9a3 3 0 01-3 3"/><path d="M8 8h6M8 12h6M8 16h4"/></svg>',
+    stories:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 10-7.1 7.1L12 21l8.8-8.3a5 5 0 000-7.1z"/></svg>',
+    settings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>',
+  };
+
   // 內容區塊定義
   const SECTIONS = [
     {
@@ -162,7 +172,15 @@
     // 建立分頁
     const tabs = $("#tabs");
     SECTIONS.forEach((sec, i) => {
-      tabs.appendChild(el("button", { class: "tab" + (i === 0 ? " active" : ""), onclick: () => openSection(sec) }, [sec.label]));
+      const tab = el("button", { class: "tab" + (i === 0 ? " active" : ""), onclick: () => openSection(sec) }, []);
+      if (ICONS[sec.key]) {
+        const ico = document.createElement("span");
+        ico.className = "tab__ico";
+        ico.innerHTML = ICONS[sec.key];
+        tab.appendChild(ico);
+      }
+      tab.appendChild(document.createTextNode(sec.label));
+      tabs.appendChild(tab);
     });
     // 載入所有內容
     Promise.all(SECTIONS.map((sec) =>
@@ -190,7 +208,14 @@
   function render() {
     const sec = active, data = state[sec.file];
     const root = $("#editor"); root.innerHTML = "";
-    root.appendChild(el("div", { class: "section-head" }, [el("h2", null, [sec.title]), el("p", null, [sec.desc])]));
+    const head = el("div", { class: "section-head" }, [el("h2", null, [sec.title]), el("p", null, [sec.desc])]);
+    if (ICONS[sec.key]) {
+      const ico = document.createElement("span");
+      ico.className = "section-head__ico";
+      ico.innerHTML = ICONS[sec.key];
+      head.insertBefore(ico, head.firstChild);
+    }
+    root.appendChild(head);
 
     (sec.objectFields || []).forEach((f) => root.appendChild(fieldRow(f, data)));
 
