@@ -169,6 +169,7 @@
     $("#who").textContent = "👤 " + user;
     $("#logout-btn").addEventListener("click", () => api("/api/logout", {}).finally(() => location.reload()));
     $("#save-btn").addEventListener("click", saveActive);
+    setupPreview();
     // 建立分頁
     const tabs = $("#tabs");
     SECTIONS.forEach((sec, i) => {
@@ -290,6 +291,80 @@
 
   function setHint(text, kind) {
     const h = $("#save-hint"); h.textContent = text; h.className = "savebar__hint" + (kind ? " " + kind : "");
+  }
+
+  // ---------- 即時預覽 ----------
+  // 每個分頁對應的前台頁面
+  const PREVIEW_URLS = {
+    carousel: "/index.html",
+    events:   "/index.html#events-section",
+    impact:   "/index.html#impact",
+    news:     "/news.html",
+    stories:  "/stories.html",
+    settings: "/contact.html",
+  };
+
+  function setupPreview() {
+    $("#preview-btn").addEventListener("click", openPreview);
+    $("#preview-close").addEventListener("click", closePreview);
+    $("#preview-refresh").addEventListener("click", refreshPreview);
+    document.querySelectorAll(".preview__device-btn").forEach((btn) => {
+      btn.addEventListener("click", () => setPreviewDevice(btn.dataset.device));
+    });
+    // 預設電腦版
+    setPreviewDevice("desktop");
+    // ESC 關閉
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !$("#preview").classList.contains("hidden")) closePreview();
+    });
+  }
+
+  function stashStateToSession() {
+    SECTIONS.forEach((sec) => {
+      try { sessionStorage.setItem("cmsPreview:" + sec.file, JSON.stringify(state[sec.file] || {})); } catch (e) {}
+    });
+  }
+
+  function previewUrlForActive() {
+    const base = PREVIEW_URLS[active && active.key] || "/index.html";
+    const sep = base.includes("?") ? "&" : (base.includes("#") ? base.replace("#", "?cmsPreview=1&_hash=") : "?");
+    if (base.includes("#")) {
+      const [path, hash] = base.split("#");
+      return path + "?cmsPreview=1#" + hash;
+    }
+    return base + sep + "cmsPreview=1";
+  }
+
+  function openPreview() {
+    if (!active) return;
+    stashStateToSession();
+    const url = previewUrlForActive() + "&_t=" + Date.now();
+    $("#preview-url").textContent = url.split("?")[0] + (url.includes("#") ? url.substring(url.indexOf("#")) : "");
+    $("#preview-iframe").src = url;
+    $("#preview").classList.remove("hidden");
+    $("#preview").setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closePreview() {
+    $("#preview").classList.add("hidden");
+    $("#preview").setAttribute("aria-hidden", "true");
+    $("#preview-iframe").src = "about:blank";
+    document.body.style.overflow = "";
+  }
+
+  function refreshPreview() {
+    if ($("#preview").classList.contains("hidden")) return;
+    stashStateToSession();
+    const url = previewUrlForActive() + "&_t=" + Date.now();
+    $("#preview-iframe").src = url;
+  }
+
+  function setPreviewDevice(d) {
+    $("#preview-stage").setAttribute("data-device", d);
+    document.querySelectorAll(".preview__device-btn").forEach((b) => {
+      b.classList.toggle("active", b.dataset.device === d);
+    });
   }
 
   function saveActive() {

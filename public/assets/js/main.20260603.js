@@ -17,7 +17,16 @@
     if (isNaN(dt)) return esc(d);
     return `${dt.getFullYear()} 年 ${dt.getMonth() + 1} 月 ${dt.getDate()} 日`;
   };
-  const getJSON = (path) => fetch(path, { cache: "no-cache" }).then((r) => { if (!r.ok) throw new Error(path); return r.json(); });
+  // CMS 預覽模式：iframe 帶 ?cmsPreview=1 時，從 sessionStorage 讀取未存檔的編輯內容
+  const IS_PREVIEW = /[?&]cmsPreview=1/.test(location.search);
+  const getJSON = (path) => {
+    if (IS_PREVIEW) {
+      const file = path.replace(/^content\//, "");
+      const v = sessionStorage.getItem("cmsPreview:" + file);
+      if (v) { try { return Promise.resolve(JSON.parse(v)); } catch (e) {} }
+    }
+    return fetch(path, { cache: "no-cache" }).then((r) => { if (!r.ok) throw new Error(path); return r.json(); });
+  };
 
   /* ---------- Inject shared header & footer ---------- */
   const NAV = [
