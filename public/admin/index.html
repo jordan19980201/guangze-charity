@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>內容管理後台｜新竹市廣澤慈善協會</title>
-  <link rel="icon" href="../assets/img/logo.png" />
+  <link rel="icon" href="/assets/img/logo.png" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="admin.css?v=20260602c" />
+  <link rel="stylesheet" href="/admin/admin.css?v=20260602d" />
 </head>
 <body>
   <!-- 登入畫面 -->
   <div id="login" class="login hidden">
     <form class="login__card" id="login-form">
-      <img src="../assets/img/logo.png" alt="廣澤慈善協會" class="login__logo" />
+      <img src="/assets/img/logo.png" alt="廣澤慈善協會" class="login__logo" />
       <h1>內容管理後台</h1>
       <p class="login__sub">請以協會帳號登入</p>
       <label>帳號<input type="text" id="username" autocomplete="username" required /></label>
@@ -26,7 +26,7 @@
   <!-- 設定未完成提示 -->
   <div id="setup" class="login hidden">
     <div class="login__card">
-      <img src="../assets/img/logo.png" alt="廣澤慈善協會" class="login__logo" />
+      <img src="/assets/img/logo.png" alt="廣澤慈善協會" class="login__logo" />
       <h1>後台尚未啟用</h1>
       <p class="login__sub">系統管理設定（Vercel 環境變數）尚未完成。<br />請完成設定後再登入，或聯繫網站維護人員。</p>
     </div>
@@ -35,9 +35,9 @@
   <!-- 管理介面 -->
   <div id="app" class="app hidden">
     <header class="topbar">
-      <div class="topbar__brand"><img src="../assets/img/logo.png" alt="" /> 內容管理後台</div>
+      <div class="topbar__brand"><img src="/assets/img/logo.png" alt="" /> 內容管理後台</div>
       <div class="topbar__right">
-        <a href="../index.html" target="_blank" class="topbar__link">↗ 查看網站</a>
+        <a href="/index.html" target="_blank" class="topbar__link">↗ 查看網站</a>
         <span id="who" class="topbar__who"></span>
         <button class="btn btn--ghost" id="logout-btn">登出</button>
       </div>
@@ -53,6 +53,6 @@
 
   <div id="loading" class="loading">載入中…</div>
 
-  <script src="admin.js"></script>
+  <script src="/admin/admin.js?v=20260602d"></script>
 </body>
 </html>
