@@ -7,8 +7,8 @@
 
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
-  // iOS Safari 對某些 <button> 的 click 事件會失效；同時綁 click + pointerup，
-  // 用 debounce 避免重複觸發。所有 tap-able 元件都改用這個 helper。
+  // iOS Safari 對某些 <button> 的 click 事件會失效；三層兜底 click + pointerup + touchend。
+  // 用 350ms lock 避免同一次 tap 重複觸發。所有 tap-able 元件都改用這個 helper。
   const onTap = (el, handler) => {
     if (!el) return;
     let locked = false;
@@ -17,11 +17,19 @@
       locked = true;
       try { handler(e); } finally { setTimeout(() => { locked = false; }, 350); }
     };
+    // 1. 標準 click（桌機、Android、大部分 iOS）
     el.addEventListener("click", wrap);
+    // 2. pointerup（iOS 13+ 更穩，click 失效時兜底；桌機 mouse 讓 click 處理）
     el.addEventListener("pointerup", (e) => {
-      if (e.pointerType === "mouse") return; // 桌機讓 click 自己處理，避免雙擊
+      if (e.pointerType === "mouse") return;
       wrap(e);
     });
+    // 3. touchend（iOS 12 及更老、及某些 iOS 15 pointer events 失靈時的最終保險）
+    el.addEventListener("touchend", (e) => {
+      // 避免觸發 iOS 合成的 click
+      if (e.cancelable) e.preventDefault();
+      wrap(e);
+    }, { passive: false });
   };
   const esc = (str = "") =>
     String(str).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
