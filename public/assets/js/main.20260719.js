@@ -7,6 +7,22 @@
 
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  // iOS Safari 對某些 <button> 的 click 事件會失效；同時綁 click + pointerup，
+  // 用 debounce 避免重複觸發。所有 tap-able 元件都改用這個 helper。
+  const onTap = (el, handler) => {
+    if (!el) return;
+    let locked = false;
+    const wrap = (e) => {
+      if (locked) return;
+      locked = true;
+      try { handler(e); } finally { setTimeout(() => { locked = false; }, 350); }
+    };
+    el.addEventListener("click", wrap);
+    el.addEventListener("pointerup", (e) => {
+      if (e.pointerType === "mouse") return; // 桌機讓 click 自己處理，避免雙擊
+      wrap(e);
+    });
+  };
   const esc = (str = "") =>
     String(str).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
   const paras = (body = "") =>
@@ -370,7 +386,7 @@
         if (n > 0) countEl.textContent = `🪷 至今已有 ${n.toLocaleString()} 位信眾參拜`;
       }).catch(() => {});
 
-    prayBtn.addEventListener("click", () => {
+    onTap(prayBtn, () => {
       const name = ($("#pray-name").value || "").trim();
       const type = $("#pray-type").value;
       const wish = ($("#pray-wish").value || "").trim();
@@ -438,7 +454,7 @@
       poes.forEach((p) => p.classList.remove("tossing"));
       if (result) { result.hidden = true; result.classList.remove("is-yang", "is-laugh", "is-yin"); }
     }
-    tossBtn.addEventListener("click", () => {
+    onTap(tossBtn, () => {
       if (tossBtn.disabled) return;
       tossBtn.disabled = true;
       reset();
@@ -455,7 +471,7 @@
         tossBtn.disabled = false;
       }, 1700);
     });
-    if (tossAgain) tossAgain.addEventListener("click", reset);
+    if (tossAgain) onTap(tossAgain, reset);
   }
 
   /* ---------- Oracle (today's fortune) ---------- */
@@ -500,7 +516,7 @@
       updateAgainBtn();
       if (!countdownTimer) countdownTimer = setInterval(updateAgainBtn, 60000);
     }
-    $("#oracle-draw").addEventListener("click", () => {
+    onTap($("#oracle-draw"), () => {
       if (!pool.length) return;
       const item = pool[Math.floor(((Date.now() * 9301 + 49297) % 233280) / 233280 * pool.length)];
       try { localStorage.setItem("gz_oracle", JSON.stringify({ date: new Date().toISOString().slice(0, 10), item })); } catch (e) {}
