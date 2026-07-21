@@ -537,6 +537,7 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
 
 /* 擲筊按鈕（書法字） */
 .toss__btn {
+  display: inline-block;                       /* 蓋掉 .btn 的 inline-flex — iOS Safari 對 inline-flex + letter-spacing 有 tap area 錯位 bug */
   background: linear-gradient(135deg, #b2221c, #7a1414);
   color: #ffd96b; border: 2px solid #ffd96b;
   padding: 14px 36px; border-radius: 999px;
@@ -544,7 +545,11 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
   letter-spacing: .6em; padding-right: calc(36px - .6em);
   box-shadow: 0 6px 20px rgba(0,0,0,.4), inset 0 0 12px rgba(255,217,107,.2);
   transition: transform .2s, box-shadow .3s;
-  position: relative;
+  position: relative; z-index: 3;              /* 保險：確保按鈕在點擊層之上，不被 poe 或背景蓋到 */
+  pointer-events: auto;                        /* 防禦性宣告：不論祖先如何，本身可以接受 tap */
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
 }
 .toss__btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(178,34,28,.5), inset 0 0 16px rgba(255,217,107,.3); }
 .toss__btn:disabled { opacity: .6; cursor: not-allowed; }
