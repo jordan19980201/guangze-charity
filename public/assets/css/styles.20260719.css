@@ -31,7 +31,13 @@
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* iOS Safari 停用「雙擊縮放」，避免每次點擊要等 300ms 或誤判成 zoom；
+     仍保留兩指 pinch-zoom（無障礙可用） */
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+}
 body {
   font-family: var(--sans);
   color: var(--ink);
@@ -39,7 +45,9 @@ body {
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  touch-action: manipulation;
 }
+button, a, [role="button"], input, textarea, select { touch-action: manipulation; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
@@ -540,13 +548,15 @@ body:not(:has(.upcoming)) .worship-floats { bottom: 24px; }
   display: inline-block;                       /* 蓋掉 .btn 的 inline-flex — iOS Safari 對 inline-flex + letter-spacing 有 tap area 錯位 bug */
   background: linear-gradient(135deg, #b2221c, #7a1414);
   color: #ffd96b; border: 2px solid #ffd96b;
-  padding: 14px 36px; border-radius: 999px;
+  padding: 18px 44px; border-radius: 999px;   /* 加大 padding — 讓 hit area 遠超過 iOS 44pt 建議最小值 */
+  min-width: 120px; min-height: 52px;          /* 明確最小尺寸，避免 iOS 判定為過小需 zoom */
   font-family: var(--serif); font-size: 1.4rem; font-weight: 900;
-  letter-spacing: .6em; padding-right: calc(36px - .6em);
+  letter-spacing: .6em; padding-right: calc(44px - .6em);
   box-shadow: 0 6px 20px rgba(0,0,0,.4), inset 0 0 12px rgba(255,217,107,.2);
   transition: transform .2s, box-shadow .3s;
   position: relative; z-index: 3;              /* 保險：確保按鈕在點擊層之上，不被 poe 或背景蓋到 */
   pointer-events: auto;                        /* 防禦性宣告：不論祖先如何，本身可以接受 tap */
+  touch-action: manipulation;                  /* 明確覆蓋祖先設定 */
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
